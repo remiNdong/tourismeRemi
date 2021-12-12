@@ -32,6 +32,7 @@ public class Test extends HttpServlet {
             throws ServletException, IOException {
         // TODO Auto-generated method stub
         String maVue = "/vues/test.jsp";
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher( maVue );
         dispatcher.forward( request, response );
 
