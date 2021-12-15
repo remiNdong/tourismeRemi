@@ -4,11 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Erreur </title>
 </head>
 <body>
 
-<p> test 24 , accent évasé ?</p>
+<h1>Erreur</h1>
+</br>
+<p>  ${message}</p>
 
+</br>
+<p>
+        <a href="${pageContext.request.contextPath}/requeteur">Accueil</a>
+</p>
 </body>
 </html>
