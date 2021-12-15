@@ -12,7 +12,7 @@
     <div class="entete">
         <h1>Bienvenue chez Cnam Tourisme</h1> 
         <div id="navigation">
-        <span class="entree"><a href="">Tous les services</a></span>
+        <span class="entree"><a href="${pageContext.request.contextPath}/TousServices">Tous les services</a></span>
         <span class="entree"><a href="">Hotels</a></span>
         <span class="entree"><a href="">Restaurant</a></span>
         <span class="entree"><a href="">Activités</a></span>

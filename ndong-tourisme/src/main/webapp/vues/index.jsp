@@ -30,7 +30,7 @@
 
         <div id="conteneur">
         <div class="corps" >
-            <span class="image" ><img src="<c:url value="/images/break_vacances.jpg"/>"/><p><a href="">Tous les services</a></p></span>
+            <span class="image" ><img src="<c:url value="/images/break_vacances.jpg"/>"/><p><a href="${pageContext.request.contextPath}/TousServices">Tous les services</a></p></span>
             <span class="image" ><img src="<c:url value="/images/hotel.jpg"/>"/><p><a href="">Hotels</a></p></span>
 
         </div>

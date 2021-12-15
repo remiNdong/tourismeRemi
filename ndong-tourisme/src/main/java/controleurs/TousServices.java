@@ -1,6 +1,7 @@
-package modeles;
+package controleurs;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,19 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.TousServicesDAO;
+import modeles.Service;
+
 /**
- * Servlet implementation class Test
+ * Servlet implementation class TousServices
  */
-@WebServlet( "/Test" )
-public class Test extends HttpServlet {
+@WebServlet( "/TousServices" )
+public class TousServices extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private String            VUES             = "/vues/";
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test() {
-        super();
-        // TODO Auto-generated constructor stub
+    public TousServices() {
+
     }
 
     /**
@@ -30,12 +34,22 @@ public class Test extends HttpServlet {
      */
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        String maVue = "/vues/test.jsp";
+
+        String maVue = VUES;
+
+        try {
+            TousServicesDAO tousServicesDAO = new TousServicesDAO();
+            List<Service> listServices = tousServicesDAO.listeServices();
+            request.setAttribute( "listServices", listServices );
+            maVue = VUES + "tousServices.jsp";
+
+        } catch ( Exception e ) {
+            maVue = VUES + "exception.jsp";
+            request.setAttribute( "message", e.getMessage() );
+        }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher( maVue );
         dispatcher.forward( request, response );
-
     }
 
     /**

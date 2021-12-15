@@ -5,13 +5,21 @@
            
             background-color: rgb(223, 154, 51);
             color: white;
-            font-size: 14px;
+            font-size: 18px;
             font-family: Verdana, Arial;
             text-align: center;
             border: double 2px white;
             padding: 1em;
             position:relative;
             font-family: "Gill Sans", sans-serif;
+        }
+        
+        .bas-de-page{
+        position:absolute;
+		bottom:0;
+		width:100%;
+		padding-top:50px;
+		height:50px;
         }
 
        
@@ -22,6 +30,10 @@
             margin: 0.25em;
             color :rgb(18, 48, 150);
            
+        }
+        
+        body{
+        text-align: center;
         }
         
         
