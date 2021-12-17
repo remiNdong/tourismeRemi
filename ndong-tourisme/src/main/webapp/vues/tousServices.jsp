@@ -2,24 +2,31 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+  
      
      <style  type="text/css">
-     
-     
-/* Tableaux -------------------------------------------------------------------------------------*/
-table{
+         
+h3{
+	color : rgb(19, 40, 224);
+	font-size: 18px;
+}
+
+    table{
 	border-collapse: collapse;
 	font-family: "Gill Sans", sans-serif;
 	font-size: 14px;
 	text-align: center;
 }
+
 tr.pair{
 	background-color:  rgb(192, 224, 240);
 }
 tr.impair{
 	background-color: rgb(114, 193, 233);
 }
-th{
+
+        
+        th{
 	color: #0568CD;
 	border: 1px solid #0568CD;
 	padding: 5px;
@@ -29,18 +36,16 @@ td{
 	border: 1px solid #ddd;
 	padding: 5px;
 	width: 20em;
+	height: 5em;
 	
 }
-td{
-	height: 5em;
-}
 
-h3{
-	color : rgb(19, 40, 224);
-	font-size: 18px;
+.choix , input {
+color : red;
+font-weight : bold;
 }
-
-     
+        
+   
      </style>
      
      <t:layout>
@@ -55,6 +60,8 @@ h3{
  			</c:when>
  		<%-- Sinon, affichage du tableau. --%>
 		    <c:otherwise>
+		    
+		     <form method="get" action="${pageContext.request.contextPath}/detailService">
  				<table>
 						 <tr>
 							 <th>Id</th>
@@ -79,10 +86,11 @@ h3{
 						 <td><c:out value="${ service.adresse.adresse }"></c:out></td>
 						 <td><c:out value="${ service.adresse.ville }"></c:out></td>
 						 <td><c:out value="${ service.adresse.pays }"></c:out></td>
-						 <td><a href="<c:url value=""></c:url>">Voir ce Service</a></td>
+						 <td class="choix"><input type="submit"  name="idService" value="${service.id}">Voir ce Service</td>
 						 </tr>
 					</c:forEach>
 			 </table>
+			 </form>
  		</c:otherwise>
 	 </c:choose>
  	 	
