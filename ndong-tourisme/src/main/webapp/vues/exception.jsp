@@ -1,20 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Erreur </title>
-</head>
-<body>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<h1>Erreur</h1>
-</br>
+
+  <t:layout>
+ 	 	<jsp:attribute name="body_area">
+
 <p>  ${message}</p>
 
-</br>
-<p>
-        <a href="${pageContext.request.contextPath}/requeteur">Accueil</a>
-</p>
-</body>
-</html>
+
+	 	
+	</jsp:attribute>
+	</t:layout>
+

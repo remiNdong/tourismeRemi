@@ -31,14 +31,18 @@ public class Adresse {
     }
 
     @Column
-    private String Pays;
+    private String pays;
 
     public String getPays() {
-        return Pays;
+        return pays;
     }
 
     public void setPays( String pays ) {
-        Pays = pays;
+        this.pays = pays;
     }
 
+    public String toString() {
+
+        return adresse + " " + ville + " -  " + pays;
+    }
 }

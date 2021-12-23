@@ -44,7 +44,7 @@ public class TousServicesDAO {
         return services;
     }
 
-    public Service findService( Integer idService ) {
+    public Service findService( Long idService ) {
 
         Service service = session.get( Service.class, idService );
 
@@ -55,7 +55,7 @@ public class TousServicesDAO {
 
     }
 
-    public Hotel findHotel( Integer idService ) {
+    public Hotel findHotel( Long idService ) {
 
         Hotel service = session.get( Hotel.class, idService );
 
@@ -66,7 +66,7 @@ public class TousServicesDAO {
 
     }
 
-    public Restaurant findRestaurant( Integer idService ) {
+    public Restaurant findRestaurant( Long idService ) {
 
         Restaurant service = session.get( Restaurant.class, idService );
 
@@ -77,7 +77,7 @@ public class TousServicesDAO {
 
     }
 
-    public Activite findActivite( Integer idService ) {
+    public Activite findActivite( Long idService ) {
 
         Activite service = session.get( Activite.class, idService );
 
@@ -88,60 +88,57 @@ public class TousServicesDAO {
 
     }
 
-    public boolean estUnHotel( Integer idService ) {
+    public boolean estUnHotel( Long idService ) {
 
         Query q = session
                 .createQuery(
-                        " select count(*)  from Hotel where id=:idService" );
+                        " select count(*) as nbHotel from Hotel where id=:idService" );
 
-        List<Object[]> result = q.list();
-        q.setInteger( "idService", idService );
+        q.setLong( "idService", idService );
+        Long resultat = (Long) q.uniqueResult();
 
         // on verifie si l'idService est present dans la table Hotel
-        Integer nbHotel = (Integer) result.get( 0 )[0];
 
-        if ( nbHotel > 0 )
-            return true;
-        else
+        if ( resultat == 0 )
             return false;
+        else
+            return true;
 
     }
 
-    public boolean estUnRestaurant( Integer idService ) {
+    public boolean estUnRestaurant( Long idService ) {
 
         Query q = session
                 .createQuery(
-                        " select count(*)  from Restaurant where id=:idService" );
+                        " select count(*) as nbRestaurant  from Restaurant where id=:idService" );
 
-        List<Object[]> result = q.list();
-        q.setInteger( "idService", idService );
+        q.setLong( "idService", idService );
+        Long resultat = (Long) q.uniqueResult();
 
-        // on verifie si l'idService est present dans la table Hotel
-        Integer nbRestaurant = (Integer) result.get( 0 )[0];
+        // on verifie si l'idService est present dans la table Restaurant
 
-        if ( nbRestaurant > 0 )
-            return true;
-        else
+        if ( resultat == 0 )
             return false;
+        else
+            return true;
 
     }
 
-    public boolean estUneActivite( Integer idService ) {
+    public boolean estUneActivite( Long idService ) {
 
         Query q = session
                 .createQuery(
-                        " select count(*)  from Activite where id=:idService" );
+                        " select count(*) as nbActivite from Activite where id=:idService" );
 
-        List<Object[]> result = q.list();
-        q.setInteger( "idService", idService );
+        q.setLong( "idService", idService );
+        Long resultat = (Long) q.uniqueResult();
 
-        // on verifie si l'idService est present dans la table Hotel
-        Integer nbActivite = (Integer) result.get( 0 )[0];
+        // on verifie si l'idService est present dans la table Activite
 
-        if ( nbActivite > 0 )
-            return true;
-        else
+        if ( resultat == 0 )
             return false;
+        else
+            return true;
 
     }
 

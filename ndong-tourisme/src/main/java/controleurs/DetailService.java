@@ -15,7 +15,7 @@ import modeles.Hotel;
 import modeles.Restaurant;
 
 /**
- * Servlet implementation class TousServices
+ * Servlet implementation class DetailService
  */
 @WebServlet( "/DetailService" )
 public class DetailService extends HttpServlet {
@@ -37,25 +37,28 @@ public class DetailService extends HttpServlet {
             throws ServletException, IOException {
 
         String maVue = VUES;
-        // On devrait récupérer l'action requise par l'utilisateur
+
         String idServiceString = request.getParameter( "idService" );
 
         try {
-            Integer idService = Integer.parseInt( idServiceString );
+            Long idService = Long.parseLong( idServiceString );
 
             TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
             if ( tousServicesDAO.estUnHotel( idService ) ) {
                 Hotel hotel = tousServicesDAO.findHotel( idService );
                 request.setAttribute( "hotel", hotel );
+                request.setAttribute( "typeService", "hotel" );
 
             } else if ( tousServicesDAO.estUnRestaurant( idService ) ) {
                 Restaurant restaurant = tousServicesDAO.findRestaurant( idService );
                 request.setAttribute( "restaurant", restaurant );
+                request.setAttribute( "typeService", "restaurant" );
 
             } else if ( tousServicesDAO.estUneActivite( idService ) ) {
                 Activite activite = tousServicesDAO.findActivite( idService );
                 request.setAttribute( "activite", activite );
+                request.setAttribute( "typeService", "activite" );
 
             }
 

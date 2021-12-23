@@ -104,6 +104,17 @@ public class Notation {
         this.qualiteAccompagnateur = qualiteAccompagnateur;
     }
 
+    @Column
+    private String commentaire;
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire( String commentaire ) {
+        this.commentaire = commentaire;
+    }
+
     @ManyToOne
     @JoinColumn( name = "id_Internaute" )
     private Internaute internaute;

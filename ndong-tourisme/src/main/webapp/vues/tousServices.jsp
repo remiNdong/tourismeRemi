@@ -61,7 +61,7 @@ font-weight : bold;
  		<%-- Sinon, affichage du tableau. --%>
 		    <c:otherwise>
 		    
-		     <form method="get" action="${pageContext.request.contextPath}/detailService">
+		     <form method="get" action="${pageContext.request.contextPath}/DetailService">
  				<table>
 						 <tr>
 							 <th>Id</th>
