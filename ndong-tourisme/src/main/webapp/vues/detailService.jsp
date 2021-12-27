@@ -3,108 +3,32 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
   
-     
-     <style  type="text/css">
-         
-		h3{
-			color : rgb(19, 40, 224);
-			font-size: 18px;
-		}
-		
-		
-		
-		fieldset{
-		
-		text-align: center; 
-		font-weight: bold;
-		color : rgb(165, 38, 10);
-		font-size: 14 px;
-		border: solid 4pt rgb(165, 38, 10);
-		
-		}
-		
-		#nomService {
-		
-		color : rgb(255, 159, 51);
-		font-size: 18px;
-		font-weight: bold;
-		
-		}
-		
-		
-		 img {
-            
-            width: 40px;
-	        height: 30px;
-        }
-
-		form{
-		
-		color : rgb(19, 40, 224);
-			font-size: 14px;
-			font-weight: bold;
-
-			}
-
-     #monform{
-     
-     width: 20rem;
-			height: 10rem;
-			background-image: url(images/palmier.jpg);
-			background-repeat: no-repeat;
-			color: red;
-			font-size: 2rem;
-     
-     }
-     
-     #commentaireOui{
-     
-     		color : black;
-     		text-align: center; 
-			
-     }
-     
-      #commentaireOui ol {
-     display: inline-block;
-     
-     }
-     
-     #commentaireOui li {
-    
-      float: left;
-        padding: 2px 5px;
-     
-     }
-     
-     
-     
-    
-     
-        
-   
-     </style>
-     
+  <link type="text/css" rel="stylesheet" href="<c:url value="/util/css/detailServiceCss.css"/>" />
+ 
+ 
      <t:layout>
  	 	<jsp:attribute name="body_area">
  	 	
- 	 	 <form method="post" action="${pageContext.request.contextPath}/detailService">
+ 	 	<div id="formConteneur" >
  	 	
- 	 	<c:choose>
+ 	 	 <form id="monform" method="post" action="${pageContext.request.contextPath}/detailService">
  	 	
- 		<c:when test="${typeService == 'hotel'}">
- 		<c:set var="service" value="${ hotel }"></c:set>
-		</c:when>
+ 	 		<c:choose>
+ 	 	
+		 		<c:when test="${typeService == 'hotel'}">
+		 		<c:set var="service" value="${ hotel }"></c:set>
+				</c:when>
 		
-		<c:when test="${typeService == 'restaurant'}">
- 		<c:set var="service" value="${ restaurant }"></c:set>
-		</c:when>
+				<c:when test="${typeService == 'restaurant'}">
+		 		<c:set var="service" value="${ restaurant }"></c:set>
+				</c:when>
 		
-		 <c:otherwise>
-		 <c:set var="service" value="${ activite }"></c:set>
-		 </c:otherwise>
+			 <c:otherwise>
+				 <c:set var="service" value="${ activite }"></c:set>
+			 </c:otherwise>
 		
 		
-		</c:choose>
+			</c:choose>
  
  	 	
  	 	<h3>DETAIL DU SERVICE</h3>
@@ -164,10 +88,10 @@
  	 	 
  	 	 <input type="hidden"  name="idService" value="${service.id}"/>
  	 	 
- 	 	 <p><input type="radio"  name="action" value="offreDuMoment">Voir l'offre du moment</p>
- 	 	 <p><input type="radio"  name="action" value="listOffres">Voir toutes les offres</p>
+ 	 	 <p class="offre"><input type="radio"  name="action" value="offreDuMoment">Voir l'offre du moment</p>
+ 	 	 <p class="offre"><input type="radio"  name="action" value="listOffres">Voir toutes les offres</p>
  	 	 
- 	 	 <input id="monForm" type="submit"   value="C'est parti">  
+ 	 	 <input id="monFormInput" type="submit"   value="C'est parti"/>  
  	 	 
  	 	
  	 	 
@@ -236,7 +160,16 @@
  	 	 
  	 	 </form>
  	 	 
- 	 	  <script src="<c:url value="/util/jquery.js"></c:url>"></script>
+ 	 	 </div>
+ 	 	 
+
+ 	 	 
+ 	 	
+ 	 	
+	</jsp:attribute>
+	</t:layout>
+	
+	 	 	  <script src="<c:url value="/util/jquery.js"></c:url>"></script>
  
  <%-- Petite fonction jQuery permettant l'activation des commentaires --%>
  <script>
@@ -254,8 +187,3 @@ bloc d'éléments correspondant (nouveau ou ancien client) */
  });
  });
  </script>
- 	 	 
- 	 	
- 	 	
-	</jsp:attribute>
-	</t:layout>

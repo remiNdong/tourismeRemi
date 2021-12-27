@@ -3,32 +3,15 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+  <link type="text/css" rel="stylesheet" href="<c:url value="/util/css/indexCss.css"/>" />
+	
 
-<style  type="text/css">
-   .corps{
-            display: flex;
-            text-align: center;
-            font-family: "Gill Sans", sans-serif;
-            font-size: 14px;
-        }
-
-        img {
-            
-            width: 400px;
-	        height: 300px;
-        }
-
-        .image{
-            flex: 1 1 0em;   
-        }
-
- </style>
 
  <t:layout>
  	 	<jsp:attribute name="body_area">
 
 
-        <div id="conteneur">
+        
         <div class="corps" >
             <span class="image" ><img src="<c:url value="/images/break_vacances.jpg"/>"/><p><a href="${pageContext.request.contextPath}/TousServices">Tous les services</a></p></span>
             <span class="image" ><img src="<c:url value="/images/hotel.jpg"/>"/><p><a href="">Hotels</a></p></span>
@@ -40,7 +23,7 @@
             <span class="image" ><img src="<c:url value="/images/activite.jpg"/>"/><p><a href="">Activités</a></p></span>
 
         </div>
-    </div>
+  
 
 	</jsp:attribute>
 		</t:layout>

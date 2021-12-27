@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+h3{
+	color : rgb(19, 40, 224);
+	font-size: 18px;
+}
+
+    table{
+	border-collapse: collapse;
+	font-family: "Gill Sans", sans-serif;
+	font-size: 14px;
+	text-align: center;
+}
+
+tr.pair{
+	background-color:  rgb(192, 224, 240);
+}
+tr.impair{
+	background-color: rgb(114, 193, 233);
+}
+
+        
+        th{
+	color: #0568CD;
+	border: 1px solid #0568CD;
+	padding: 5px;
+}
+
+td{
+	border: 1px solid #ddd;
+	padding: 5px;
+	width: 20em;
+	height: 5em;
+	
+}
+
+.choix , input {
+color : red;
+font-weight : bold;
+}
+        

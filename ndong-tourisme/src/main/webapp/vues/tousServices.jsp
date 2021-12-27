@@ -3,50 +3,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
      <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
   
-     
-     <style  type="text/css">
-         
-h3{
-	color : rgb(19, 40, 224);
-	font-size: 18px;
-}
-
-    table{
-	border-collapse: collapse;
-	font-family: "Gill Sans", sans-serif;
-	font-size: 14px;
-	text-align: center;
-}
-
-tr.pair{
-	background-color:  rgb(192, 224, 240);
-}
-tr.impair{
-	background-color: rgb(114, 193, 233);
-}
-
-        
-        th{
-	color: #0568CD;
-	border: 1px solid #0568CD;
-	padding: 5px;
-}
-
-td{
-	border: 1px solid #ddd;
-	padding: 5px;
-	width: 20em;
-	height: 5em;
-	
-}
-
-.choix , input {
-color : red;
-font-weight : bold;
-}
-        
-   
-     </style>
+     <link type="text/css" rel="stylesheet" href="<c:url value="/util/css/tousServicesCss.css"/>" />
      
      <t:layout>
  	 	<jsp:attribute name="body_area">

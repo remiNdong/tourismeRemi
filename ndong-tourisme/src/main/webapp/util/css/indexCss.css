@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+
+   .corps{
+           display: flex; 
+            text-align: center;
+            font-family: "Gill Sans", sans-serif;
+            font-size: 14px;
+         
+        }
+
+        img {
+            
+            width: 50%;
+	        height: 80%;
+        }
+
+        .image{
+            flex: 1 1 0em;   
+        }
