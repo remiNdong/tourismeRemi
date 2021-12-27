@@ -11,7 +11,7 @@
  	 	
  	 	<div id="formConteneur" >
  	 	
- 	 	 <form id="monform" method="post" action="${pageContext.request.contextPath}/detailService">
+ 	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/detailService">
  	 	
  	 		<c:choose>
  	 	
@@ -91,7 +91,8 @@
  	 	 <p class="offre"><input type="radio"  name="action" value="offreDuMoment">Voir l'offre du moment</p>
  	 	 <p class="offre"><input type="radio"  name="action" value="listOffres">Voir toutes les offres</p>
  	 	 
- 	 	 <input id="monFormInput" type="submit"   value="C'est parti"/>  
+ 	 	 <input style="background-image: url('images/palmier.jpg');" id="monFormSubmit" type="submit"   value="C'est parti"/> 
+ 	 	
  	 	 
  	 	
  	 	 
