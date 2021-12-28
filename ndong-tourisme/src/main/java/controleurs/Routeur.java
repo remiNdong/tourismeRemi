@@ -73,10 +73,13 @@ public class Routeur extends HttpServlet {
                     request.setAttribute( "listeFini", "oui" );
 
                 // on recupere la page de l'indice indiqué
+                // il y en a au moins une
                 List<Service> listServices = ensemblePage.getPage( indexPage );
 
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
                 httpSession.setAttribute( "listServices", listServices );
+                // on prepare l'index de la futur page au cas ou il y a
+                // pagination
                 httpSession.setAttribute( "indexPage", indexPage + 1 );
 
                 maVue = VUES + "tousServices.jsp";

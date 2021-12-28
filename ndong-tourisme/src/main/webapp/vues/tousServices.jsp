@@ -24,6 +24,17 @@
 		    
 		     <form method="get" action="${pageContext.request.contextPath}/DetailService">
 		     <input type="hidden"  name="indexPage" value="${indexPage+1}">
+		     
+		     <div id="choixVille">
+		     <select name="ville" id="listeVilles">
+ 			<option value="">Choisissez une ville...</option>
+			 <c:forEach items="${ sessionScope.villes }" var="ville">
+			 <option value="${ ville }"> </option>
+			 </c:forEach>
+			 </select>
+			 <input id="boutonVille" type="submit" value="Lancer la recherche">
+			 </div>
+		     
  				<table>
 						 <tr>
 							 <th>Référence</th>

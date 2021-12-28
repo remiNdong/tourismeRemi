@@ -13,6 +13,7 @@ import modeles.Activite;
 import modeles.Hotel;
 import modeles.Restaurant;
 import modeles.Service;
+import utils.SqlUtils;
 
 public class TousServicesDAO {
 
@@ -32,10 +33,27 @@ public class TousServicesDAO {
         session = sessionFactory.openSession();
     }
 
+    public List<Service> selectionServices() {
+
+        String table = "Service";
+        Class<?>[] tabClass = { String.class };
+        String[] attributs = { "adresse.ville" };
+        String[] selections = { "ville" };
+        Object[] valeurs = { "Paris" };
+
+        Query q = SqlUtils.prepareSQL( table, tabClass, attributs, selections, valeurs, session );
+
+        List<Service> services = q.list();
+        if ( services.size() == 0 )
+            throw new RuntimeException( "Aucun Service trouvé" );
+
+        return services;
+
+    }
+
     public List<Service> listeServices() {
 
-        Query q = session
-                .createQuery( "from Service " );
+        Query q = session.createQuery( "from Service " );
 
         List<Service> services = q.list();
         if ( services.size() == 0 )

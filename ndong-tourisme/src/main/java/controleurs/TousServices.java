@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.TousServicesDAO;
 import modeles.Service;
 import modelesWeb.EnsemblePage;
 
@@ -40,8 +39,6 @@ public class TousServices extends HttpServlet {
         String maVue = VUES;
 
         try {
-            TousServicesDAO tousServicesDAO = new TousServicesDAO();
-            List<Service> listToutServices = tousServicesDAO.listeServices();
 
             // il faudra d'abord trouver l'index de la page des resutat a
             // afficher
@@ -51,12 +48,8 @@ public class TousServices extends HttpServlet {
 
             indexPage = (Integer) httpSession.getAttribute( "indexPage" );
 
-            // on recupere l'objet Page s'il existe
+            // on recupere l'objet Page
             EnsemblePage<Service> ensemblePage = (EnsemblePage<Service>) httpSession.getAttribute( "ensemblePage" );
-
-            // sinon on cree cet objet
-            if ( ensemblePage == null )
-                ensemblePage = new EnsemblePage<Service>( listToutServices );
 
             // on recupere la page de l'indice indiqué
             List<Service> listServices = ensemblePage.getPage( indexPage );
@@ -73,6 +66,8 @@ public class TousServices extends HttpServlet {
 
             httpSession.setAttribute( "ensemblePage", ensemblePage );
             httpSession.setAttribute( "listServices", listServices );
+            // on prepare l'index de la futur page au cas ou il y a
+            // pagination
             httpSession.setAttribute( "indexPage", indexPage + 1 );
 
             maVue = VUES + "tousServices.jsp";
