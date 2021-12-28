@@ -10,19 +10,24 @@
  <t:layout>
  	 	<jsp:attribute name="body_area">
 
-
+<form method="get" action="${pageContext.request.contextPath}/Routeur">
+	<input type="hidden"  name="indexPage" value="${1}">
+	
         
         <div class="corps" >
-            <span class="image" ><img src="<c:url value="/images/break_vacances.jpg"/>"/><p><a href="${pageContext.request.contextPath}/TousServices">Tous les services</a></p></span>
-            <span class="image" ><img src="<c:url value="/images/hotel.jpg"/>"/><p><a href="">Hotels</a></p></span>
+        
+            <span  class="image" ><input id="monFormSubmit" style="background-image: url('images/break_vacances.jpg');" class="imageSubmit" type="submit"  name="action" value="Tous Les Services"></span>
+              <span  class="image" ><input id="monFormSubmit2"  style="background-image: url('images/hotel.jpg');" class="imageSubmit" type="submit"  name="action" value="Hotels"></span>
 
         </div>
         <div  class="corps">
          
-            <span class="image" ><img src="<c:url value="/images/restaurant.jpg"/>"/><p><a href="">Restaurant</a></p></span>
-            <span class="image" ><img src="<c:url value="/images/activite.jpg"/>"/><p><a href="">Activités</a></p></span>
+             <span  class="image" ><input  id="monFormSubmit3" style="background-image: url('images/restaurant.jpg');" class="imageSubmit" type="submit"  name="action" value="Restaurants"></span>
+              <span  class="image" ><input id="monFormSubmit4"  style="background-image: url('images/activite.jpg');" class="imageSubmit" type="submit"  name="action" value="Activites"></span>
 
         </div>
+        
+        </form>
   
 
 	</jsp:attribute>

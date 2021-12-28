@@ -139,4 +139,23 @@ public class Notation {
         this.service = service;
     }
 
+    @Override
+    public int hashCode() {
+
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals( Object obj ) {
+        if ( this == obj ) {
+            return true;
+        }
+        if ( !( obj instanceof Service ) ) {
+            return false;
+        }
+        Notation autre = (Notation) obj;
+
+        return this.getId() == autre.getId();
+    }
+
 }

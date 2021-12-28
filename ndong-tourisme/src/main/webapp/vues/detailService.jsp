@@ -39,7 +39,7 @@
  	 	<legend id="nomService"><c:out value="${ service.nom }"></c:out></legend>
  	 	
  	 	
- 	 	<p>Id : <c:out value="${ service.id }"></c:out></p>
+ 	 	<p>Référence: <c:out value="${ service.id }"></c:out></p>
  	 	<p><c:out value="${ service.description }"></c:out></p>
  	 	<p><c:out value="${ service.adresse } "></c:out></p>
  	 	

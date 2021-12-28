@@ -9,12 +9,58 @@
          
         }
 
-        img {
-            
-            width: 50%;
-	        height: 80%;
-        }
+       
 
         .image{
             flex: 1 1 0em;   
         }
+        
+  #monFormSubmit {
+	
+	
+	background-image: url("break_vacances.jpg");
+	
+			
+			
+}
+
+#monFormSubmit2 {
+	
+	
+	background-image: url("hotel.jpg");
+	
+			
+			
+}
+
+#monFormSubmit3 {
+	
+	
+	background-image: url("musee.jpg");
+	
+			
+}
+
+#monFormSubmit4 {
+	
+	
+	background-image: url("restaurant.jpg");
+	
+			
+}
+
+.imageSubmit {
+	
+	color : rgb(19, 40, 224);
+	font-size: 14px;
+	font-weight: bold;
+	
+	background-repeat: no-repeat;
+	color: blue;
+	font-size: 2rem;
+	width: 600px;
+	height:300px;
+	margin : 1em;
+	padding : 1em;
+		
+}

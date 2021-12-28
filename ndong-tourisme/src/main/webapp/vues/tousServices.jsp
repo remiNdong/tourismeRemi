@@ -8,7 +8,11 @@
      <t:layout>
  	 	<jsp:attribute name="body_area">
  	 	
+ 	 	
  	 	<h3>TOUS NOS SERVICES</h3>
+ 	 	
+		
+		
  	 	
  		<c:choose>
  	 	
@@ -19,9 +23,10 @@
 		    <c:otherwise>
 		    
 		     <form method="get" action="${pageContext.request.contextPath}/DetailService">
+		     <input type="hidden"  name="indexPage" value="${indexPage+1}">
  				<table>
 						 <tr>
-							 <th>Id</th>
+							 <th>Référence</th>
 							 <th>Nom</th>
 							 <th>Description</th>
 							 <th>Adresse</th>
@@ -47,10 +52,28 @@
 						 </tr>
 					</c:forEach>
 			 </table>
+			 
+			
+		
 			 </form>
  		</c:otherwise>
 	 </c:choose>
+	 
+	 
+	 
+ 	 		
+ 	 	<div id="blocPageSuivante">
+			  <c:if  test="${listeFini == 'non'}">
+		 		  <span id="pageSuivante"><a href="${pageContext.request.contextPath}/TousServices">Page suivante</a></span>
+			</c:if>		
+		</div>
+	 
+	 
+	 
+	
  	 	
  	 	
 	</jsp:attribute>
 	</t:layout>
+	
+	
