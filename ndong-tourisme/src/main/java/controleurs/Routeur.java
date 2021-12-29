@@ -67,15 +67,10 @@ public class Routeur extends HttpServlet {
 
                 EnsemblePage<Service> ensemblePage = new EnsemblePage<Service>( listToutServices );
 
-                // chaque ensemble a au moins une page
-                // par contre si c'etait la derniere page il faudra le notifier
-                if ( ensemblePage.getPages().keySet().size() > 1 )
-                    request.setAttribute( "listeFini", "non" );
-                else
-                    request.setAttribute( "listeFini", "oui" );
-
                 // on recupere la page de l'indice indiqué
                 // il y en a au moins une
+                // lors de la page routeur on demandera systematiquement
+                // l'indice 1
                 List<Service> listServices = ensemblePage.getPage( indexPage );
 
                 // on recupere la liste des villes a afficher dans le select de
@@ -84,10 +79,8 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "villes", listVilles );
 
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listServices", listServices );
-                // on prepare l'index de la futur page au cas ou il y a
-                // pagination
-                httpSession.setAttribute( "indexPage", indexPage + 1 );
 
                 maVue = VUES + "tousServices.jsp";
 

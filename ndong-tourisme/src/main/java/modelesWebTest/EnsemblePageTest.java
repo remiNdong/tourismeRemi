@@ -45,7 +45,7 @@ class EnsemblePageTest {
 
         List<Service> listServices = new ArrayList<Service>();
 
-        for ( int i = 0; i < 25; i++ ) {
+        for ( int i = 0; i < 35; i++ ) {
             listServices.add( new Service() );
             listServices.get( i ).setId( new Long( i + "" ) );
 
@@ -53,10 +53,13 @@ class EnsemblePageTest {
         EnsemblePage<Service> ensemblePage = new EnsemblePage<Service>( listServices );
         int nbList = ensemblePage.getPages().keySet().size();
         // il doit y avoir 3 pages
-        assertEquals( 3, nbList );
+        assertEquals( 4, nbList );
+        List<Service> page4 = ensemblePage.getPage( 4 );
         List<Service> page3 = ensemblePage.getPage( 3 );
         // il doit rester seulement 5 service a la page 3
-        assertEquals( 5, page3.size() );
+        assertEquals( 5, page4.size() );
+        assertEquals( 34, page4.get( 4 ).getId() );
+        assertEquals( 24, page3.get( 4 ).getId() );
     }
 
 }

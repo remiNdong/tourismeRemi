@@ -49,7 +49,7 @@ public class TousServices extends HttpServlet {
 
             HttpSession httpSession = request.getSession();
 
-            indexPage = (Integer) httpSession.getAttribute( "indexPage" );
+            indexPage = Integer.parseInt( request.getParameter( "indexPage" ) );
 
             // on recupere l'objet Page
             EnsemblePage<Service> ensemblePage = (EnsemblePage<Service>) httpSession.getAttribute( "ensemblePage" );
@@ -57,21 +57,9 @@ public class TousServices extends HttpServlet {
             // on recupere la page de l'indice indiqué
             List<Service> listServices = ensemblePage.getPage( indexPage );
 
-            // chaque ensemble a au moins une page
-            // par contre si c'etait la derniere page il faudra le notifier
-            // on recupere la page de l'indice indiqué
-            List<Service> listeSuivante = ensemblePage.getPage( indexPage + 1 );
-
-            if ( listeSuivante == null )
-                request.setAttribute( "listeFini", "oui" );
-            else
-                request.setAttribute( "listeFini", "non" );
-
             httpSession.setAttribute( "ensemblePage", ensemblePage );
+            request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
             request.setAttribute( "listServices", listServices );
-            // on prepare l'index de la futur page au cas ou il y a
-            // pagination
-            httpSession.setAttribute( "indexPage", indexPage + 1 );
 
             // on recupere la liste des villes a afficher dans le select de
             // la jsp

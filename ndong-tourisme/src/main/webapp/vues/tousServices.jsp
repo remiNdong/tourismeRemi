@@ -76,9 +76,12 @@
 	 
  	 		
  	 	<div id="blocPageSuivante">
-			  <c:if  test="${listeFini == 'non'}">
-		 		  <span id="pageSuivante"><a href="${pageContext.request.contextPath}/TousServices">Page suivante</a></span>
-			</c:if>		
+ 	 	
+ 	 	 <c:forEach items="${ listePage }" var="key" >
+ 	 	 <span id="pageSuivante"><a href="<c:url value="TousServices?indexPage=${ key }"></c:url>">${ key }</a></span>
+ 	 	 
+ 	 	 </c:forEach>
+ 	 	
 		</div>
 	 
 	 
