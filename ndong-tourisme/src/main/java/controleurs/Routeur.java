@@ -1,6 +1,7 @@
 package controleurs;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -41,6 +42,7 @@ public class Routeur extends HttpServlet {
         String maVue = "";
 
         try {
+            TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
             String action = request.getParameter( "action" );
 
@@ -52,18 +54,18 @@ public class Routeur extends HttpServlet {
 
             if ( action.equals( "Tous Les Services" ) ) {
 
-                TousServicesDAO tousServicesDAO = new TousServicesDAO();
-                List<Service> listToutServices = tousServicesDAO.listeServices();
+                String ville = request.getParameter( "ville" );
+                // parametre de la fonction de preparations de requete Sql
+                // pour la selection de Service on a un seul critere de
+                // selection qui est la ville
+                List<Object> valeurs = null;
 
-                // il faudra d'abord trouver l'index de la page des resutat a
-                // afficher
+                if ( ville != null && !ville.equals( "" ) )
+                    valeurs = Arrays.asList( ville );
 
-                // on recupere l'objet Page s'il existe
-                EnsemblePage<Service> ensemblePage = (EnsemblePage<Service>) httpSession.getAttribute( "ensemblePage" );
+                List<Service> listToutServices = tousServicesDAO.selectionServices( valeurs );
 
-                // sinon on cree cet objet
-                if ( ensemblePage == null )
-                    ensemblePage = new EnsemblePage<Service>( listToutServices );
+                EnsemblePage<Service> ensemblePage = new EnsemblePage<Service>( listToutServices );
 
                 // chaque ensemble a au moins une page
                 // par contre si c'etait la derniere page il faudra le notifier
@@ -76,8 +78,13 @@ public class Routeur extends HttpServlet {
                 // il y en a au moins une
                 List<Service> listServices = ensemblePage.getPage( indexPage );
 
+                // on recupere la liste des villes a afficher dans le select de
+                // la jsp
+                List<String> listVilles = tousServicesDAO.listVilles();
+                request.setAttribute( "villes", listVilles );
+
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
-                httpSession.setAttribute( "listServices", listServices );
+                request.setAttribute( "listServices", listServices );
                 // on prepare l'index de la futur page au cas ou il y a
                 // pagination
                 httpSession.setAttribute( "indexPage", indexPage + 1 );

@@ -1,38 +1,50 @@
 package utils;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 public class SqlUtils {
 
-    public static Query prepareSQL( String table, Class<?>[] tabClass, String[] attributs, String[] selections,
-            Object[] valeurs,
+    public static Query prepareSQL( String table, List<Class<?>> tabClass, List<String> attributs,
+            List<String> selections,
+            List<Object> valeurs,
             Session session ) {
 
         try {
+            Query q = null;
 
             String tuple = minuscule( table );
 
-            String requete = "from " + table + " as " + tuple + "  where ";
+            String requete = "from " + table + " as " + tuple;
 
-            int compteur = 0;
-            for ( int i = 0; i < attributs.length; i++ ) {
+            // si les arguments de selection sont null alors c'est une requete
+            // ou on demande toute la table , pas de selection, elle n'aura donc
+            // pas de preparation
+            if ( attributs != null && selections != null && valeurs != null ) {
+                requete = requete + "  where ";
 
-                if ( compteur != 0 )
-                    requete = requete + " and ";
+                int compteur = 0;
+                for ( int i = 0; i < attributs.size(); i++ ) {
 
-                requete = requete + " " + tuple + "." + attributs[i] + "= " + ":" + selections[i];
-            }
-            System.out.println( requete );
+                    if ( compteur != 0 )
+                        requete = requete + " and ";
 
-            Query q = session.createQuery( requete );
+                    requete = requete + " " + tuple + "." + attributs.get( i ) + "= " + ":" + selections.get( i );
+                }
 
-            for ( int i = 0; i < valeurs.length; i++ ) {
-                Method method = getMethode( tabClass[i].getName() );
-                method.invoke( q,
-                        selections[i], valeurs[i] );
+                q = session.createQuery( requete );
+
+                for ( int i = 0; i < valeurs.size(); i++ ) {
+                    Method method = getMethode( tabClass.get( i ).getName() );
+                    method.invoke( q,
+                            selections.get( i ), valeurs.get( i ) );
+
+                }
+            } else {
+                q = session.createQuery( requete );
 
             }
 

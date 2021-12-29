@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -33,13 +34,16 @@ public class TousServicesDAO {
         session = sessionFactory.openSession();
     }
 
-    public List<Service> selectionServices() {
+    /*
+     * Methode qui sera utilisé pour selectionner la ville du Service et filtrer
+     */
+
+    public List<Service> selectionServices( List<Object> valeurs ) {
 
         String table = "Service";
-        Class<?>[] tabClass = { String.class };
-        String[] attributs = { "adresse.ville" };
-        String[] selections = { "ville" };
-        Object[] valeurs = { "Paris" };
+        List<Class<?>> tabClass = Arrays.asList( String.class );
+        List<String> attributs = Arrays.asList( "adresse.ville" );
+        List<String> selections = Arrays.asList( "ville" );
 
         Query q = SqlUtils.prepareSQL( table, tabClass, attributs, selections, valeurs, session );
 
@@ -157,6 +161,18 @@ public class TousServicesDAO {
             return false;
         else
             return true;
+
+    }
+
+    public List<String> listVilles() {
+
+        Query q = session.createQuery( "select distinct service.adresse.ville from Service as service" );
+
+        List<String> listVilles = q.list();
+        if ( listVilles.size() == 0 )
+            throw new RuntimeException( "Aucun Service trouvé" );
+
+        return listVilles;
 
     }
 

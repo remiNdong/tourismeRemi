@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.TousServicesDAO;
 import modeles.Service;
 import modelesWeb.EnsemblePage;
 
@@ -40,6 +41,8 @@ public class TousServices extends HttpServlet {
 
         try {
 
+            TousServicesDAO tousServicesDAO = new TousServicesDAO();
+
             // il faudra d'abord trouver l'index de la page des resutat a
             // afficher
             int indexPage;
@@ -65,10 +68,15 @@ public class TousServices extends HttpServlet {
                 request.setAttribute( "listeFini", "non" );
 
             httpSession.setAttribute( "ensemblePage", ensemblePage );
-            httpSession.setAttribute( "listServices", listServices );
+            request.setAttribute( "listServices", listServices );
             // on prepare l'index de la futur page au cas ou il y a
             // pagination
             httpSession.setAttribute( "indexPage", indexPage + 1 );
+
+            // on recupere la liste des villes a afficher dans le select de
+            // la jsp
+            List<String> listVilles = tousServicesDAO.listVilles();
+            request.setAttribute( "villes", listVilles );
 
             maVue = VUES + "tousServices.jsp";
 

@@ -22,14 +22,15 @@
  		<%-- Sinon, affichage du tableau. --%>
 		    <c:otherwise>
 		    
-		     <form method="get" action="${pageContext.request.contextPath}/DetailService">
+		     <form method="get" action="${pageContext.request.contextPath}/Routeur">
 		     <input type="hidden"  name="indexPage" value="${indexPage+1}">
+		     <input type="hidden"  name="action" value="Tous Les Services">
 		     
 		     <div id="choixVille">
 		     <select name="ville" id="listeVilles">
  			<option value="">Choisissez une ville...</option>
-			 <c:forEach items="${ sessionScope.villes }" var="ville">
-			 <option value="${ ville }"> </option>
+			 <c:forEach items="${ villes }" var="ville">
+			 <option value="${ ville }">${ ville }</option>
 			 </c:forEach>
 			 </select>
 			 <input id="boutonVille" type="submit" value="Lancer la recherche">
@@ -59,10 +60,11 @@
 						 <td><c:out value="${ service.adresse.adresse }"></c:out></td>
 						 <td><c:out value="${ service.adresse.ville }"></c:out></td>
 						 <td><c:out value="${ service.adresse.pays }"></c:out></td>
-						 <td class="choix"><input type="submit"  name="idService" value="${service.id}">Voir ce Service</td>
+						 <td class="choix"><a href="<c:url value="DetailService?indexPage=3&ville=&idService=${ service.id }"></c:url>">Voir ce Service</a></td>
 						 </tr>
 					</c:forEach>
 			 </table>
+			 
 			 
 			
 		
