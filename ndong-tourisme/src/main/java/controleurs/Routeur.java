@@ -1,7 +1,7 @@
 package controleurs;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.HotelsDAO;
 import dao.TousServicesDAO;
+import modeles.Hotel;
 import modeles.Service;
 import modelesWeb.EnsemblePage;
 
@@ -42,7 +44,6 @@ public class Routeur extends HttpServlet {
         String maVue = "";
 
         try {
-            TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
             String action = request.getParameter( "action" );
 
@@ -53,15 +54,17 @@ public class Routeur extends HttpServlet {
             HttpSession httpSession = request.getSession();
 
             if ( action.equals( "Tous Les Services" ) ) {
+                TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
                 String ville = request.getParameter( "ville" );
                 // parametre de la fonction de preparations de requete Sql
                 // pour la selection de Service on a un seul critere de
                 // selection qui est la ville
-                List<Object> valeurs = null;
+                List<Object> valeurs = new ArrayList<Object>();
 
-                if ( ville != null && !ville.equals( "" ) )
-                    valeurs = Arrays.asList( ville );
+                if ( ville != null && !ville.equals( "" ) ) {
+                    valeurs.add( ville );
+                }
 
                 List<Service> listToutServices = tousServicesDAO.selectionServices( valeurs );
 
@@ -83,6 +86,61 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "listServices", listServices );
 
                 maVue = VUES + "tousServices.jsp";
+
+            } else if ( action.equals( "Hotels" ) ) {
+                HotelsDAO hotelsDAO = new HotelsDAO();
+
+                String ville = request.getParameter( "ville" );
+                String etoileString = request.getParameter( "etoile" );
+                Integer etoiles = 0;
+
+                if ( etoileString != null )
+                    etoiles = Integer.parseInt( etoileString );
+                // parametres de la fonction de preparations de requete Sql
+                // pour la selection d'hotel on a un deux criteres de
+                // selection qui la ville et le classement en etoiles
+                List<Object> valeurs = new ArrayList<Object>();
+                List<String> attributs = new ArrayList<String>();
+                List<String> selections = new ArrayList<String>();
+
+                if ( ville != null && !ville.equals( "" ) ) {
+                    valeurs.add( ville );
+                    attributs.add( "adresse.ville" );
+                    selections.add( "ville" );
+                }
+
+                if ( etoiles != 0 ) {
+                    valeurs.add( etoiles );
+                    attributs.add( "classement" );
+                    selections.add( "classement" );
+
+                }
+
+                List<Hotel> listToutHotels = hotelsDAO.selectionHotels( attributs, selections, valeurs );
+
+                EnsemblePage<Hotel> ensemblePage = new EnsemblePage<Hotel>( listToutHotels );
+
+                // on recupere la page de l'indice indiqué
+                // il y en a au moins une
+                // lors de la page routeur on demandera systematiquement
+                // l'indice 1
+                List<Hotel> listHotels = ensemblePage.getPage( indexPage );
+
+                // on recupere la liste des villes a afficher dans le select de
+                // la jsp
+                List<String> listVilles = hotelsDAO.listVilles();
+                request.setAttribute( "villes", listVilles );
+
+                // on recupere la liste des etoiles a afficher dans le select de
+                // la jsp
+                List<Integer> listEtoiles = hotelsDAO.listEtoiles();
+                request.setAttribute( "etoiles", listEtoiles );
+
+                httpSession.setAttribute( "ensemblePage", ensemblePage );
+                request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
+                request.setAttribute( "listHotels", listHotels );
+
+                maVue = VUES + "hotels.jsp";
 
             }
 

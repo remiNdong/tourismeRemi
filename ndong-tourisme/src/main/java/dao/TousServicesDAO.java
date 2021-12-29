@@ -41,11 +41,10 @@ public class TousServicesDAO {
     public List<Service> selectionServices( List<Object> valeurs ) {
 
         String table = "Service";
-        List<Class<?>> tabClass = Arrays.asList( String.class );
         List<String> attributs = Arrays.asList( "adresse.ville" );
         List<String> selections = Arrays.asList( "ville" );
 
-        Query q = SqlUtils.prepareSQL( table, tabClass, attributs, selections, valeurs, session );
+        Query q = SqlUtils.prepareSQL( table, attributs, selections, valeurs, session );
 
         List<Service> services = q.list();
         if ( services.size() == 0 )

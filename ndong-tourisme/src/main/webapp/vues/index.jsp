@@ -11,7 +11,6 @@
  	 	<jsp:attribute name="body_area">
 
 <form method="get" action="${pageContext.request.contextPath}/Routeur">
-	<input type="hidden"  name="indexPage" value="${1}">
 	
         
         <div class="corps" >
