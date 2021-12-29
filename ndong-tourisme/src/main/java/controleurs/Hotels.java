@@ -71,7 +71,7 @@ public class Hotels extends HttpServlet {
             List<Integer> listEtoiles = hotelsDAO.listEtoiles();
             request.setAttribute( "etoiles", listEtoiles );
 
-            maVue = VUES + "tousServices.jsp";
+            maVue = VUES + "hotels.jsp";
 
         } catch (
 
