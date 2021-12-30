@@ -52,7 +52,7 @@
 						 <%-- Affichage des propriétés du Service --%>
 						 <td><c:out value="${ offre.id }"></c:out></td>
 						 <td><c:out value="${ offre.nbPersonnes }"></c:out></td>
-						 <td><c:out value="${ offre.prix }"></c:out></td>
+						 <td><c:out value="${ offre.prix } €"></c:out></td>
 						 <td><c:out value="${ offre.descriptif }"></c:out></td>
 						 <td class="choix"><a href="<c:url value="DetailOffre?idOffre=${ offre.id }"></c:url>">Découvrer le prix abonné CNAM Tourisme</a></td>
 						 </tr>

@@ -69,6 +69,30 @@ public class Offres extends HttpServlet {
                 request.setAttribute( "listeOffres", listeOffres );
 
                 maVue = VUES + "offres.jsp";
+            } else if ( action.equals( "offreDuMoment" ) ) {
+
+                Long idService = Long.parseLong( idServiceString );
+
+                TousServicesDAO tousServicesDAO = new TousServicesDAO();
+
+                Service service = tousServicesDAO.findService( idService );
+
+                Offre offre = service.getMeilleureOffre();
+
+                Double prixOffre = 0.00;
+
+                if ( tousServicesDAO.estUnHotel( service.getId() ) )
+                    prixOffre = offre.calculDuPrixFinal( "Hotel" );
+                else if ( tousServicesDAO.estUnRestaurant( service.getId() ) )
+                    prixOffre = offre.calculDuPrixFinal( "Restaurant" );
+                else if ( tousServicesDAO.estUnRestaurant( service.getId() ) )
+                    prixOffre = offre.calculDuPrixFinal( "Activite" );
+
+                request.setAttribute( "prixOffre", prixOffre );
+                request.setAttribute( "offre", offre );
+
+                maVue = VUES + "detailOffre.jsp";
+
             }
 
         } catch (

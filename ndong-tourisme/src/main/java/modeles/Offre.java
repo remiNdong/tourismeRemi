@@ -47,6 +47,29 @@ public class Offre {
         this.prix = prix;
     }
 
+    public Double calculDuPrixFinal( String type ) {
+
+        Double retour = this.prix;
+
+        // on va tester de quel type est le Service pour calculer son prix
+        if ( type.equals( "Hotel" ) ) {
+            Hotel hotel = (Hotel) prestataire;
+
+            return retour - ( retour * hotel.getPourcentageMarge() / 100 );
+        } else if ( type.equals( "Restaurant" ) ) {
+            Restaurant restaurant = (Restaurant) prestataire;
+
+            return retour - restaurant.getMargeFixe();
+        } else if ( type.equals( "Activite" ) ) {
+            Activite activite = (Activite) prestataire;
+
+            return retour - activite.getMargeNegociee();
+        }
+
+        return retour;
+
+    }
+
     @Column
     private String descriptif;
 

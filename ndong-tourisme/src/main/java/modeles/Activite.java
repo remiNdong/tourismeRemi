@@ -55,4 +55,12 @@ public class Activite extends Service {
     @Column( name = "marge_Negociee" )
     private Integer margeNegociee;
 
+    public Integer getMargeNegociee() {
+        return margeNegociee;
+    }
+
+    public void setMargeNegociee( Integer margeNegociee ) {
+        this.margeNegociee = margeNegociee;
+    }
+
 }
