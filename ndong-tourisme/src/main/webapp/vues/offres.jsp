@@ -16,11 +16,11 @@
  	 		<p>${service.adresse.adresse}</p>
 			<p>${service.adresse.ville}</p>
 			<p>${service.adresse.pays}</p>
-			<p><a href="<c:url value="DetailService?idService=${ service.id }"></c:url>">Retour au Service</a></td></p>
+			<p><a href="<c:url value="DetailService?idService=${ service.id }"></c:url>">Retour au Service</a></p>
 		 </fieldset>
  	 	
 		
-		
+
  	 	
  		<c:choose>
  	 	
@@ -31,9 +31,9 @@
 		    <c:otherwise>
 		    
 		     
-		 
+		 	
 		     
- 				<table id="tabledesOffres">
+ 				<table>
 						 <tr>
 							 <th>Réfèrence</th>
 							 <th>Nombre de Personnes</th>
@@ -48,7 +48,7 @@
 					 <c:forEach items="${listeOffres }" var="offre" varStatus="boucle">
 						 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de
 						fond de chaque ligne du tableau. --%>
-						 <tr class="${boucle.index % 2 == 0 ? 'pair' : 'impair'}">
+						 <tr class="${boucle.index % 2 == 0 ? 'pairOffre' : 'impairOffre'}">
 						 <%-- Affichage des propriétés du Service --%>
 						 <td><c:out value="${ offre.id }"></c:out></td>
 						 <td><c:out value="${ offre.nbPersonnes }"></c:out></td>
@@ -65,10 +65,9 @@
  		</c:otherwise>
 	 </c:choose>
 	 
-	 
-	 
+
  	 		
- 	 	<div id="blocPageSuivante">
+ 	 	<div id="blocPageSuivanteOffres">
  	 	
  	 	 <c:forEach items="${ listePage }" var="key" >
  	 	 <span id="pageSuivante"><a href="<c:url value="OffresDuService?indexPage=${ key }"></c:url>">${ key }</a></span>

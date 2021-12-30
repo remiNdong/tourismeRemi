@@ -54,7 +54,6 @@ public class Offres extends HttpServlet {
                 TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
                 Service service = tousServicesDAO.findService( idService );
-                request.setAttribute( "service", service );
 
                 EnsemblePage<Offre> ensemblePage = new EnsemblePage<Offre>(
                         new ArrayList( service.getOffresProposees() ) );
@@ -64,6 +63,7 @@ public class Offres extends HttpServlet {
                 List<Offre> listeOffres = ensemblePage.getPage( 1 );
 
                 HttpSession httpSession = request.getSession();
+                httpSession.setAttribute( "service", service );
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listeOffres", listeOffres );
