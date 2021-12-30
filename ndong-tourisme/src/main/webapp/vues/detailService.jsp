@@ -11,7 +11,7 @@
  	 	
  	 	<div id="formConteneur" >
  	 	
- 	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/detailService">
+ 	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/Offres">
  	 	
  	 		<c:choose>
  	 	
@@ -89,7 +89,7 @@
  	 	 <input type="hidden"  name="idService" value="${service.id}"/>
  	 	 
  	 	 <p class="offre"><input type="radio"  name="action" value="offreDuMoment">Voir l'offre du moment</p>
- 	 	 <p class="offre"><input type="radio"  name="action" value="listOffres">Voir toutes les offres</p>
+ 	 	 <p class="offre"><input type="radio"  name="action" value="listeOffres" checked>Voir toutes les offres</p>
  	 	 
  	 	 <input style="background-image: url('images/palmier.jpg');" id="monFormSubmit" type="submit"   value="C'est parti"/> 
  	 	
@@ -98,8 +98,8 @@
  	 	 
  	 	 
  	 	 <h3>Voir les Commentaires <img src="<c:url value="/images/fleche.png"/>"/>
- 	 	 <input type="radio" name="visuCommentaire" value="Oui"/>Oui
- 	 	 <input type="radio" name="visuCommentaire" value="Non"/>Non
+ 	 	 <input type="radio" name="visuCommentaire" value="Oui" />Oui
+ 	 	 <input type="radio" name="visuCommentaire" value="Non" checked/>Non
  	 	 
  	 	  </h3>
  	 	 

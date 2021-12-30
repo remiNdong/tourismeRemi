@@ -29,7 +29,7 @@ public class RestaurantsDAO {
 
     /*
      * Methode qui sera utilisé pour selectionner la ville du Service et la
-     * possibilité d'avoir une terrasse t de reserver
+     * possibilité d'avoir une terrasse et de reserver
      * 
      */
 

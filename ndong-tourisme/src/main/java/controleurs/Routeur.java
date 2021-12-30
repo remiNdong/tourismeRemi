@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ActivitesDAO;
 import dao.HotelsDAO;
 import dao.RestaurantsDAO;
 import dao.TousServicesDAO;
+import modeles.Activite;
 import modeles.Hotel;
 import modeles.Restaurant;
 import modeles.Service;
@@ -100,7 +102,7 @@ public class Routeur extends HttpServlet {
                     etoiles = Integer.parseInt( etoileString );
                 // parametres de la fonction de preparations de requete Sql
                 // pour la selection d'hotel on a un deux criteres de
-                // selection qui la ville et le classement en etoiles
+                // selection qui sont la ville et le classement en etoiles
                 List<Object> valeurs = new ArrayList<Object>();
                 List<String> attributs = new ArrayList<String>();
                 List<String> selections = new ArrayList<String>();
@@ -153,7 +155,7 @@ public class Routeur extends HttpServlet {
 
                 // parametres de la fonction de preparations de requete Sql
                 // pour la selection de restaurants on a un trois criteres de
-                // selection qui la ville , la terrasse et la reservation
+                // selection qui sont la ville , la terrasse et la reservation
                 List<Object> valeurs = new ArrayList<Object>();
                 List<String> attributs = new ArrayList<String>();
                 List<String> selections = new ArrayList<String>();
@@ -198,6 +200,58 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "listRestaurants", listRestaurants );
 
                 maVue = VUES + "restaurants.jsp";
+
+            } else if ( action.equals( "Activites" ) ) {
+                ActivitesDAO activitesDAO = new ActivitesDAO();
+
+                String ville = request.getParameter( "ville" );
+                String type = request.getParameter( "type" );
+
+                // parametres de la fonction de preparations de requete Sql
+                // pour la selection d'activités on a un deux criteres de
+                // selection qui sont la ville et le type
+                List<Object> valeurs = new ArrayList<Object>();
+                List<String> attributs = new ArrayList<String>();
+                List<String> selections = new ArrayList<String>();
+
+                if ( ville != null && !ville.equals( "" ) ) {
+                    valeurs.add( ville );
+                    attributs.add( "adresse.ville" );
+                    selections.add( "ville" );
+                }
+
+                if ( type != null && !type.equals( "" ) ) {
+                    valeurs.add( type );
+                    attributs.add( "type" );
+                    selections.add( "type" );
+                }
+
+                List<Activite> listToutesActivites = activitesDAO.selectionActivites( attributs, selections,
+                        valeurs );
+
+                EnsemblePage<Activite> ensemblePage = new EnsemblePage<Activite>( listToutesActivites );
+
+                // on recupere la page de l'indice indiqué
+                // il y en a au moins une
+                // lors de la page routeur on demandera systematiquement
+                // l'indice 1
+                List<Activite> listActivites = ensemblePage.getPage( indexPage );
+
+                // on recupere la liste des villes a afficher dans le select de
+                // la jsp
+                List<String> listVilles = activitesDAO.listVilles();
+                request.setAttribute( "villes", listVilles );
+
+                // on recupere la liste des types a afficher dans le select de
+                // la jsp
+                List<String> listTypes = activitesDAO.listTypes();
+                request.setAttribute( "types", listTypes );
+
+                httpSession.setAttribute( "ensemblePage", ensemblePage );
+                request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
+                request.setAttribute( "listActivites", listActivites );
+
+                maVue = VUES + "activites.jsp";
 
             }
 

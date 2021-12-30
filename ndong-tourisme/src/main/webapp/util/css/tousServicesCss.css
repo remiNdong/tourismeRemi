@@ -19,6 +19,13 @@ tr.impair{
 	background-color: rgb(114, 193, 233);
 }
 
+tr.pair#fieldSetOffres{
+	background-color:  rgb(160, 255, 51);
+}
+tr.impairfieldSetOffres{
+	background-color: rgb(228, 255, 51);
+}
+
         
         th{
 	color: #0568CD;
@@ -38,6 +45,27 @@ td{
 color : red;
 font-weight : bold;
 }
+
+fieldset{
+	
+		text-align: center; 
+		font-weight: bold;
+		color : rgb(165, 38, 10);
+		font-size: 14 px;
+		border: solid 4pt rgb(165, 38, 10);
+		margin : 2em;
+}
+
+	#nomService {
+		
+		color : rgb(255, 159, 51);
+		font-size: 26px;
+		font-weight: bold;
+			
+			
+		
+		}
+		
 
 
         

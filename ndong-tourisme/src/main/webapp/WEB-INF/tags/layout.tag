@@ -21,7 +21,7 @@
         <span class="entree"><a href="<c:url value="Routeur?indexPage=1&action=Tous+Les+Services"/>">Tous les services</a></span>
         <span class="entree"><a href="<c:url value="Routeur?indexPage=1&action=Hotels"/>">Hotels</a></span>
         <span class="entree"><a href="<c:url value="Routeur?indexPage=1&action=Restaurants"/>">Restaurants</a></span>
-        <span class="entree"><a href="">Activités</a></span>
+        <span class="entree"><a href="<c:url value="Routeur?indexPage=1&action=Activites"/>">Activités</a></span>
     	</div>
     </header>
     
