@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.HotelsDAO;
+import dao.RestaurantsDAO;
 import dao.TousServicesDAO;
 import modeles.Hotel;
+import modeles.Restaurant;
 import modeles.Service;
 import modelesWeb.EnsemblePage;
 
@@ -141,6 +143,61 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "listHotels", listHotels );
 
                 maVue = VUES + "hotels.jsp";
+
+            } else if ( action.equals( "Restaurants" ) ) {
+                RestaurantsDAO restaurantsDAO = new RestaurantsDAO();
+
+                String ville = request.getParameter( "ville" );
+                String reservation = request.getParameter( "reservation" );
+                String terrasse = request.getParameter( "terrasse" );
+
+                // parametres de la fonction de preparations de requete Sql
+                // pour la selection de restaurants on a un trois criteres de
+                // selection qui la ville , la terrasse et la reservation
+                List<Object> valeurs = new ArrayList<Object>();
+                List<String> attributs = new ArrayList<String>();
+                List<String> selections = new ArrayList<String>();
+
+                if ( ville != null && !ville.equals( "" ) ) {
+                    valeurs.add( ville );
+                    attributs.add( "adresse.ville" );
+                    selections.add( "ville" );
+                }
+
+                if ( reservation != null && !reservation.equals( "" ) ) {
+                    valeurs.add( reservation );
+                    attributs.add( "reservation" );
+                    selections.add( "reservation" );
+                }
+
+                if ( terrasse != null && !terrasse.equals( "" ) ) {
+                    valeurs.add( terrasse );
+                    attributs.add( "terrasse" );
+                    selections.add( "terrasse" );
+
+                }
+
+                List<Restaurant> listToutRestaurants = restaurantsDAO.selectionRestaurants( attributs, selections,
+                        valeurs );
+
+                EnsemblePage<Restaurant> ensemblePage = new EnsemblePage<Restaurant>( listToutRestaurants );
+
+                // on recupere la page de l'indice indiqué
+                // il y en a au moins une
+                // lors de la page routeur on demandera systematiquement
+                // l'indice 1
+                List<Restaurant> listRestaurants = ensemblePage.getPage( indexPage );
+
+                // on recupere la liste des villes a afficher dans le select de
+                // la jsp
+                List<String> listVilles = restaurantsDAO.listVilles();
+                request.setAttribute( "villes", listVilles );
+
+                httpSession.setAttribute( "ensemblePage", ensemblePage );
+                request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
+                request.setAttribute( "listRestaurants", listRestaurants );
+
+                maVue = VUES + "restaurants.jsp";
 
             }
 

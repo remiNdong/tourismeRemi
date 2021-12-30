@@ -71,7 +71,7 @@
 						 <td><c:out value="${ hotel.adresse.adresse }"></c:out></td>
 						 <td><c:out value="${ hotel.adresse.ville }"></c:out></td>
 						 <td><c:out value="${ hotel.adresse.pays }"></c:out></td>
-						 <td class="choix"><a href="<c:url value="DetailService?indexPage=3&ville=&idService=${ hotel.id }"></c:url>">Voir cet Hotel</a></td>
+						 <td class="choix"><a href="<c:url value="DetailService?idService=${ hotel.id }"></c:url>">Voir cet Hotel</a></td>
 						 </tr>
 					</c:forEach>
 			 </table>

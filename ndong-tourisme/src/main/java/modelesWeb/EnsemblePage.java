@@ -42,7 +42,8 @@ public class EnsemblePage<E> {
 
         }
 
-        if ( pages.get( indice ) == null )
+        // on enregistre la derniere page que si elle a au moins un objet
+        if ( pages.get( indice ) == null && collect.size() > 0 )
             pages.put( indice, collect );
 
     }

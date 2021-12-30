@@ -1,5 +1,9 @@
 package configuration;
 
+import java.sql.SQLException;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -19,8 +23,9 @@ import modeles.Service;
 
 public class ConfigurationBDD {
 
-    private Configuration   configuration;
-    private ServiceRegistry serviceRegistry;
+    private static Configuration   configuration;
+    private static ServiceRegistry serviceRegistry;
+    private static Session         session;
 
     public ConfigurationBDD() {
 
@@ -37,15 +42,19 @@ public class ConfigurationBDD {
 
         serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings( configuration.getProperties() ).build();
+        SessionFactory sessionFactory = configuration.buildSessionFactory( serviceRegistry );
+        session = sessionFactory.openSession();
 
     }
 
-    public Configuration getConfiguration() {
-        return configuration;
-    }
+    /* Méthode chargée de fournir une connexion à la base de données */
+    /* package */
+    public static Session getSession() throws SQLException {
 
-    public ServiceRegistry getServiceRegistry() {
-        return serviceRegistry;
+        if ( session == null )
+            new ConfigurationBDD();
+
+        return session;
     }
 
 }

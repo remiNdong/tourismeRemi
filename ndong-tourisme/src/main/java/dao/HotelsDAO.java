@@ -3,10 +3,7 @@ package dao;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.service.ServiceRegistry;
 
 import configuration.ConfigurationBDD;
 import modeles.Hotel;
@@ -18,17 +15,17 @@ public class HotelsDAO {
     /**
      * Objet Session de Hibernate
      */
-    private Session          session;
-    private ConfigurationBDD configurationBDD;
+    private Session session;
 
     public HotelsDAO() {
 
-        configurationBDD = new ConfigurationBDD();
+        try {
 
-        ServiceRegistry serviceRegistry = configurationBDD.getServiceRegistry();
-        Configuration configuration = configurationBDD.getConfiguration();
-        SessionFactory sessionFactory = configuration.buildSessionFactory( serviceRegistry );
-        session = sessionFactory.openSession();
+            session = ConfigurationBDD.getSession();
+
+        } catch ( Exception e ) {
+            throw new RuntimeException( "probleme de connexion à la base de données" );
+        }
     }
 
     /*
