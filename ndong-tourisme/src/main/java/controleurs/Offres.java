@@ -85,7 +85,7 @@ public class Offres extends HttpServlet {
                     prixOffre = offre.calculDuPrixFinal( "Hotel" );
                 else if ( tousServicesDAO.estUnRestaurant( service.getId() ) )
                     prixOffre = offre.calculDuPrixFinal( "Restaurant" );
-                else if ( tousServicesDAO.estUnRestaurant( service.getId() ) )
+                else if ( tousServicesDAO.estUneActivite( service.getId() ) )
                     prixOffre = offre.calculDuPrixFinal( "Activite" );
 
                 request.setAttribute( "prixOffre", prixOffre );

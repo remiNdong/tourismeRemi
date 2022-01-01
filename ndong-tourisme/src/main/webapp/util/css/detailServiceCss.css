@@ -63,14 +63,11 @@
      }
      
       #commentaireOui ol {
-     display: inline-block;
-     font-weight: bold;
      
      }
      
      #commentaireOui li {
     
-      float: left;
         padding: 2px 5px;
      
      }
