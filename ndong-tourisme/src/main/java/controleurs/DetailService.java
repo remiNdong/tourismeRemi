@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import dao.TousServicesDAO;
 import modeles.Activite;
 import modeles.Hotel;
+import modeles.Internaute;
+import modeles.Notation;
 import modeles.Restaurant;
+import modeles.Service;
 
 /**
  * Servlet implementation class DetailService
@@ -42,6 +45,7 @@ public class DetailService extends HttpServlet {
 
         try {
             Long idService = Long.parseLong( idServiceString );
+            
 
             TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
@@ -61,16 +65,76 @@ public class DetailService extends HttpServlet {
                 request.setAttribute( "typeService", "activite" );
 
             }
+            
+            String action = request.getParameter( "action" );
+            
+          
+
+                String prenomInternaute = request.getParameter( "prenomInternaute" );
+                String nomInternaute = request.getParameter( "nomInternaute" );
+                String mailInternaute = request.getParameter( "mailInternaute" );
+                
+                Internaute internaute=new Internaute();
+                internaute.setPrenom( prenomInternaute );
+                internaute.setNom( nomInternaute );
+                internaute.setEmail(mailInternaute);
+                
+                Notation notation=new Notation();
+                notation.setInternaute( internaute );
+                Service service=tousServicesDAO.findService( idService );
+                notation.setService( service );
+                
+                String propreteHotel=request.getParameter( "propreteHotel" );
+                if(propreteHotel!=null) {
+                    notation.setPropreteHotel( Integer.parseInt( propreteHotel ) );
+                }
+                String calmeHotel=request.getParameter( "calmeHotel" );
+                if(calmeHotel!=null) {
+                    notation.setCalmeHotel(Integer.parseInt(calmeHotel ));
+                }
+                
+                String acceuilRestaurant=request.getParameter( "acceuilRestaurant" );
+                if(acceuilRestaurant!=null) {
+                    notation.setAcceuilRestaurant(Integer.parseInt(acceuilRestaurant));
+                }
+                
+                String qualiteRestaurant=request.getParameter( "qualiteRestaurant" );
+                if(qualiteRestaurant!=null) {
+                    notation.setQualiteRestaurant(Integer.parseInt(qualiteRestaurant));
+                }
+                
+                
+                String sensationsActivite=request.getParameter( "sensationsActivite" );
+                if(sensationsActivite!=null) {
+                    notation.setSensationsActivite(Integer.parseInt(sensationsActivite));
+                }
+                
+                String accompagnateursActivite=request.getParameter( "accompagnateursActivite" );
+                if(accompagnateursActivite!=null) {
+                    notation.setQualiteAccompagnateur(Integer.parseInt(accompagnateursActivite));
+                }
+                
+                
+
+               
+
+
+                maVue = VUES + "detailOffre.jsp";
+
+            }
 
             maVue = VUES + "detailService.jsp";
 
-        } catch ( Exception e ) {
-            maVue = VUES + "exception.jsp";
-            request.setAttribute( "message", e.getMessage() );
-        }
+        }catch(
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher( maVue );
-        dispatcher.forward( request, response );
+    Exception e)
+    {
+        maVue = VUES + "exception.jsp";
+        request.setAttribute( "message", e.getMessage() );
+    }
+
+    RequestDispatcher dispatcher = getServletContext()
+            .getRequestDispatcher( maVue );dispatcher.forward(request,response);
     }
 
     /**

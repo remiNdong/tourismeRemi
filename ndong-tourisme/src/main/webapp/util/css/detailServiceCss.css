@@ -62,9 +62,7 @@
 			
      }
      
-      #commentaireOui ol {
-     
-     }
+  
      
      #commentaireOui li {
     
@@ -91,6 +89,11 @@
      
      }
      
+     textarea{
+     
+      margin : 2em;
+     
+     }
      
     
     

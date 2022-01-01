@@ -157,7 +157,113 @@
  	 	 </ol>
  	 	 
  	 	 
+ 	 	
+ 	 	 
+ 	 
  	 	 </div>
+ 	 	 
+ 	 	 </form>
+ 	 	 
+ 	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/DetailService">
+ 	 	 <input type="hidden"  name="idService" value="${service.id}"/>
+ 	 	 
+ 	 	 <p class="offre"><input type="radio"  name="action" value="ajoutCommentaire" />Ajouter un commentaire</p>
+ 	 	 <div><textarea name="com" rows="" cols=""></textarea></div>
+ 	 		<div> 
+		 	 	<label for="nom">Prénom</label>
+					<input type="text" name="prenomInternaute" />
+					 <label for="nom">Nom</label>
+					<input type="text" name="nomInternaute" />
+					 <label for="nom">Mail</label>
+					<input type="text" name="mailInternaute" />
+					  <select name="classement">
+ 						<option value="1">Notez le service...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+			</div>
+				 <c:choose>
+ 	 	
+ 	 	<c:when test="${typeService == 'hotel'}">
+ 	 	
+ 	 	  <select name="propreteHotel">
+ 						<option value="1">Notez la propreté...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+ 						 
+ 						   <select name="calmeHotel">
+ 						<option value="1">Notez le calme...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+ 			 		
+ 		
+		</c:when>
+		
+		
+		<c:when test="${typeService == 'restaurant'}">
+		
+		  <select name="acceuilRestaurant">
+ 						<option value="1">Notez l'acceuil...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+ 						 
+ 						   <select name="qualiteRestaurant">
+ 						<option value="1">Notez la qualite...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+ 						 
+ 						 
+		
+
+		</c:when>
+		
+		
+		
+		 <c:otherwise>
+		 
+		 	   <select name="sensationsActivite">
+ 						<option value="1">Notez les sensations...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+ 						 
+ 						   <select name="accompagnateursActivite">
+ 						<option value="1">Notez les accompagnateurs...</option>
+ 						<option value="1">1</option>
+ 						<option value="2">2</option>
+ 						<option value="3">3</option>
+ 						<option value="4">4</option>
+ 						<option value="5">5</option>
+ 						 </select>
+		
+
+		 </c:otherwise>
+		 
+		 </c:choose>
+			
+			 <input  type="submit"   value="Ajoutez votre commentaire"/> 
  	 	 
  	 	 </form>
  	 	 

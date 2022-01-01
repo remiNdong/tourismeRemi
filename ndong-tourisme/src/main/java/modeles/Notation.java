@@ -1,7 +1,9 @@
 package modeles;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -115,7 +117,7 @@ public class Notation {
         this.commentaire = commentaire;
     }
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinColumn( name = "id_Internaute" )
     private Internaute internaute;
 
@@ -127,7 +129,7 @@ public class Notation {
         this.internaute = internaute;
     }
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinColumn( name = "id_Service" )
     private Service service;
 
