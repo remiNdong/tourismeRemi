@@ -33,14 +33,16 @@
 			  </c:forEach>
 			 </select>
 			 
-			 <select name="reservation" id="reservation">
-			 <option value="">Reservation</option>
+			 
+			 
+			 <select name="terrasse" id="terrasse">
+			 <option value="">Terrasse</option>
 			 <option value="OUI">OUI</option>
 			 <option value="NON">NON</option>
 			 </select>
 			 
-			 <select name="terrasse" id="terrasse">
-			 <option value="">Terrasse</option>
+			 <select name="reservation" id="reservation">
+			 <option value="">Reservation</option>
 			 <option value="OUI">OUI</option>
 			 <option value="NON">NON</option>
 			 </select>
