@@ -2,6 +2,7 @@ package modeles;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -95,7 +96,7 @@ public class Service {
     }
 
     @OneToMany( mappedBy = "service" )
-    private Set<Notation> notations = new HashSet<Notation>();
+    private Set<Notation> notations = new TreeSet<Notation>();
 
     public Set<Notation> getNotations() {
         return notations;

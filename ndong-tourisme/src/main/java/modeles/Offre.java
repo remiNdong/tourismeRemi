@@ -105,7 +105,7 @@ public class Offre {
         if ( this == obj ) {
             return true;
         }
-        if ( !( obj instanceof Service ) ) {
+        if ( !( obj instanceof Offre ) ) {
             return false;
         }
         Offre autre = (Offre) obj;

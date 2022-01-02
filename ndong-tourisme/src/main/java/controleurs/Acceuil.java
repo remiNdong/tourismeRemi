@@ -34,7 +34,7 @@ public class Acceuil extends HttpServlet {
 
         String maVue = "";
         try {
-            maVue = VUES + "index.jsp";
+            maVue = "/index.jsp";
 
         } catch ( Exception e ) {
             maVue = VUES + "exception.jsp";

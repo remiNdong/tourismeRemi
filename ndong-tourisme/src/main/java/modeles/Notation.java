@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Notation {
+public class Notation implements Comparable<Notation> {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -152,12 +152,17 @@ public class Notation {
         if ( this == obj ) {
             return true;
         }
-        if ( !( obj instanceof Service ) ) {
+        if ( !( obj instanceof Notation ) ) {
             return false;
         }
         Notation autre = (Notation) obj;
 
         return this.getId() == autre.getId();
+    }
+
+    @Override
+    public int compareTo( Notation n ) {
+        return this.id.compareTo( n.getId() );
     }
 
 }

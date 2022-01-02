@@ -55,12 +55,12 @@ public class DetailService extends HttpServlet {
 
             } else if ( tousServicesDAO.estUnRestaurant( idService ) ) {
                 Restaurant service = tousServicesDAO.findRestaurant( idService );
-                request.setAttribute( "restaurant", service );
+                request.setAttribute( "service", service );
                 request.setAttribute( "typeService", "restaurant" );
 
             } else if ( tousServicesDAO.estUneActivite( idService ) ) {
                 Activite service = tousServicesDAO.findActivite( idService );
-                request.setAttribute( "activite", service );
+                request.setAttribute( "service", service );
                 request.setAttribute( "typeService", "activite" );
 
             }
@@ -130,15 +130,19 @@ public class DetailService extends HttpServlet {
 
                     tousServicesDAO.insertNotation( notation );
 
-                    // on recharge le service apres qu'on lui ai ajouté une
-                    // notation mais avant on doit recreer un serviceDAO car la
-                    // session a été fermée
+                    // on recree un DAO car la session a ete fermee apres la
+                    // transaction
                     tousServicesDAO = new TousServicesDAO();
-                    service = tousServicesDAO.findService( idService );
-                    request.setAttribute( "service", service );
 
                 }
+
             }
+
+            // tous les ervices ont des notations donc on peut enregistrer
+            // l'objet ds la requete en tant que service et pas obligé sa sous
+            // classe
+            Service serviceNote = tousServicesDAO.findService( idService );
+            request.setAttribute( "serviceNote", serviceNote );
 
             maVue = VUES + "detailService.jsp";
 
