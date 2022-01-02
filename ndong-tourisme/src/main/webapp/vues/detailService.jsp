@@ -13,23 +13,9 @@
  	 	
  	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/Offres">
  	 	
- 	 		<c:choose>
- 	 	
-		 		<c:when test="${typeService == 'hotel'}">
-		 		<c:set var="service" value="${ hotel }"></c:set>
-				</c:when>
-		
-				<c:when test="${typeService == 'restaurant'}">
-		 		<c:set var="service" value="${ restaurant }"></c:set>
-				</c:when>
-		
-			 <c:otherwise>
-				 <c:set var="service" value="${ activite }"></c:set>
-			 </c:otherwise>
-		
-		
-			</c:choose>
- 
+ 	 		
+		 		
+				
  	 	
  	 	<h3>DETAIL DU SERVICE</h3>
  	 	
@@ -48,26 +34,26 @@
  	 	<c:when test="${typeService == 'hotel'}">
  	 	
  	 	<p>Etoiles : 
- 			<c:forEach var="i" begin="1" end="${ hotel.classement }" step="1">
+ 			<c:forEach var="i" begin="1" end="${ service.classement }" step="1">
  			<img src="<c:url value="/images/etoile.jpg"/>"/>
 			</c:forEach>
 		</p>
-		<p>Nombre de Chambres : <c:out value="${ hotel.nbChambres }"></c:out></p>
+		<p>Nombre de Chambres : <c:out value="${ service.nbChambres }"></c:out></p>
  		
 		</c:when>
 		
 		
 		<c:when test="${typeService == 'restaurant'}">
-		<p>Capacité :  <c:out value="${ restaurant.capacite }"></c:out></p>
- 		<p>Terrasse :  <c:out value="${ restaurant.terrasse }"></c:out></p>
- 		<p>Réservation :  <c:out value="${ restaurant.reservation }"></c:out></p>
+		<p>Capacité :  <c:out value="${ service.capacite }"></c:out></p>
+ 		<p>Terrasse :  <c:out value="${ service.terrasse }"></c:out></p>
+ 		<p>Réservation :  <c:out value="${ service.reservation }"></c:out></p>
 
 		</c:when>
 		
 		 <c:otherwise>
 		 
-		 <p>Type :  <c:out value="${ activite.type }"></c:out></p>
-		 <p>Durée :  <c:out value="${ activite.duree } minutes  Début : ${ activite.heureDebut }   Fin : ${ activite.heureFin }"></c:out></p>
+		 <p>Type :  <c:out value="${ service.type }"></c:out></p>
+		 <p>Durée :  <c:out value="${ service.duree } minutes  Début : ${ service.heureDebut }   Fin : ${ service.heureFin }"></c:out></p>
 		 
 		
 
@@ -93,13 +79,14 @@
  	 	 
  	 	 <input style="background-image: url('images/palmier.jpg');" id="monFormSubmit" type="submit"   value="C'est parti"/> 
  	 	
- 	 	 
+ 	 	  </form>
  	 	
  	 	 
+ 	 	  <form onsubmit="return verifForm()" class="monform" method="get" action="${pageContext.request.contextPath}/DetailService">
  	 	 
  	 	 <h3>Voir les Commentaires <img src="<c:url value="/images/fleche.png"/>"/>
- 	 	 <input type="radio" name="visuCommentaire" value="Oui" />Oui
- 	 	 <input type="radio" name="visuCommentaire" value="Non" checked/>Non
+ 	 	 <input type="radio" name="visuCommentaire" value="Oui" ${newCommentaire ?  'checked':'' } />Oui
+ 	 	 <input type="radio" name="visuCommentaire" value="Non"  ${!newCommentaire ?  'checked':'' }/>Non
  	 	 
  	 	  </h3>
  	 	 
@@ -118,23 +105,23 @@
  	 	 		 
  	 	 		 <c:choose>
  	 	
- 	 	<c:when test="${typeService == 'hotel'}">
- 	 	
- 			 <li><c:out value="${ notation.internaute.prenom } ${ notation.internaute.nom } :
- 			  Note =${ notation.nbEtoiles } , Propreté = ${ notation.propreteHotel } , Calme 
- 			    ${ notation.calmeHotel } ,  Commentaire = ${ notation.commentaire } "></c:out></li>
- 		
-		</c:when>
+	 	 	<c:when test="${typeService == 'hotel'}">
+	 	 	
+	 			 <li><c:out value="${ notation.internaute.prenom } ${ notation.internaute.nom } :
+	 			  Note =${ notation.nbEtoiles } , Propreté = ${ notation.propreteHotel } , Calme 
+	 			    ${ notation.calmeHotel } ,  Commentaire = ${ notation.commentaire } "></c:out></li>
+	 		
+			</c:when>
+			
 		
-		
-		<c:when test="${typeService == 'restaurant'}">
-		
-		 <li><c:out value="${ notation.internaute.prenom } ${ notation.internaute.nom } : Note =${ notation.nbEtoiles } ,
- 			  Acceuil =${ notation.acceuilRestaurant } , Qualité = ${ notation.qualiteRestaurant }  
- 			     ,  Commentaire = ${ notation.commentaire } "></c:out></li>
-		
-
-		</c:when>
+			<c:when test="${typeService == 'restaurant'}">
+			
+			 <li><c:out value="${ notation.internaute.prenom } ${ notation.internaute.nom } : Note =${ notation.nbEtoiles } ,
+	 			  Acceuil =${ notation.acceuilRestaurant } , Qualité = ${ notation.qualiteRestaurant }  
+	 			     ,  Commentaire = ${ notation.commentaire } "></c:out></li>
+			
+	
+			</c:when>
 		
 		
 		
@@ -159,23 +146,27 @@
  	 	 
  	 	
  	 	 
- 	 
- 	 	 </div>
+ 	 	
  	 	 
- 	 	 </form>
- 	 	 
- 	 	 <form class="monform" method="post" action="${pageContext.request.contextPath}/DetailService">
  	 	 <input type="hidden"  name="idService" value="${service.id}"/>
  	 	 
- 	 	 <p class="offre"><input type="radio"  name="action" value="ajoutCommentaire" />Ajouter un commentaire</p>
- 	 	 <div><textarea name="com" rows="" cols=""></textarea></div>
+ 	 	 <p class="offre"><input id="radioCommentaire" type="radio"  name="action" value="ajoutCommentaire" />Ajouter un commentaire</p>
+ 	 	 <div><textarea id="areaCommentaire" name="com" rows="7" cols="30" maxlength="210"></textarea></div>
  	 		<div> 
 		 	 	<label for="nom">Prénom</label>
-					<input type="text" name="prenomInternaute" />
+					<input type="text" id="prenomInternaute" name="prenomInternaute" />
 					 <label for="nom">Nom</label>
-					<input type="text" name="nomInternaute" />
+					<input type="text" id="nomInternaute" name="nomInternaute" />
 					 <label for="nom">Mail</label>
-					<input type="text" name="mailInternaute" />
+					<input type="text" id="mailInternaute" name="mailInternaute" />
+				</div>
+				
+				<div class="error" id="erreurPrenom"></div>
+				    <div class="error" id="erreurNom"></div>
+				     <div class="error" id="erreurMail"></div>
+				     <div class="error" id="erreurArea"></div>
+				      <div class="error" id="erreurRadio"></div>
+				
 					  <select name="classement">
  						<option value="1">Notez le service...</option>
  						<option value="1">1</option>
@@ -184,36 +175,38 @@
  						<option value="4">4</option>
  						<option value="5">5</option>
  						 </select>
-			</div>
-				 <c:choose>
+			
+				 
+				   
+				     <c:choose>
  	 	
- 	 	<c:when test="${typeService == 'hotel'}">
+ 	 					<c:when test="${typeService == 'hotel'}">
  	 	
- 	 	  <select name="propreteHotel">
- 						<option value="1">Notez la propreté...</option>
- 						<option value="1">1</option>
- 						<option value="2">2</option>
- 						<option value="3">3</option>
- 						<option value="4">4</option>
- 						<option value="5">5</option>
- 						 </select>
- 						 
- 						   <select name="calmeHotel">
- 						<option value="1">Notez le calme...</option>
- 						<option value="1">1</option>
- 						<option value="2">2</option>
- 						<option value="3">3</option>
- 						<option value="4">4</option>
- 						<option value="5">5</option>
- 						 </select>
+		 	 	 				 <select name="propreteHotel">
+		 						<option value="1">Notez la propreté...</option>
+		 						<option value="1">1</option>
+		 						<option value="2">2</option>
+		 						<option value="3">3</option>
+		 						<option value="4">4</option>
+		 						<option value="5">5</option>
+		 						 </select>
+		 						 
+		 						   <select name="calmeHotel">
+		 						<option value="1">Notez le calme...</option>
+		 						<option value="1">1</option>
+		 						<option value="2">2</option>
+		 						<option value="3">3</option>
+		 						<option value="4">4</option>
+		 						<option value="5">5</option>
+		 						 </select>
  			 		
  		
-		</c:when>
+						</c:when>
 		
 		
-		<c:when test="${typeService == 'restaurant'}">
+					<c:when test="${typeService == 'restaurant'}">
 		
-		  <select name="acceuilRestaurant">
+		 				 <select name="acceuilRestaurant">
  						<option value="1">Notez l'acceuil...</option>
  						<option value="1">1</option>
  						<option value="2">2</option>
@@ -234,11 +227,11 @@
  						 
 		
 
-		</c:when>
+					</c:when>
 		
 		
 		
-		 <c:otherwise>
+			 <c:otherwise>
 		 
 		 	   <select name="sensationsActivite">
  						<option value="1">Notez les sensations...</option>
@@ -259,14 +252,15 @@
  						 </select>
 		
 
-		 </c:otherwise>
+				 </c:otherwise>
 		 
-		 </c:choose>
+				 </c:choose>
 			
 			 <input  type="submit"   value="Ajoutez votre commentaire"/> 
  	 	 
  	 	 </form>
  	 	 
+ 	 	
  	 	 </div>
  	 	 
 
@@ -283,7 +277,9 @@
  jQuery(document).ready(function(){
  /* 1 - Au lancement de la page, on cache le bloc d'éléments du formulaire
 correspondant aux commentaires */
+ <c:if test="${!newCommentaire }">
  $("div#commentaireOui").hide();
+</c:if>
  /* 2 - Au clic sur un des deux boutons radio "choixNouveauClient", on affiche le
 bloc d'éléments correspondant (nouveau ou ancien client) */
  jQuery('input[name=visuCommentaire]:radio').click(function(){
@@ -293,4 +289,88 @@ bloc d'éléments correspondant (nouveau ou ancien client) */
  $("div#commentaire"+divId).show();
  });
  });
+ 
+ </script>
+  <script>
+ 
+ function verifPrenom(){
+	var prenomVar= document.getElementById("prenomInternaute");
+	var erreurPrenom=document.getElementById("erreurPrenom");
+	var resultat=true;
+	 if(prenomVar.value==""){
+		 resultat=false;
+		 erreurPrenom.textContent="Entrez votre prénom";
+	 }else{
+		 erreurPrenom.textContent="";
+	 }
+	 return resultat;
+ }
+ 
+ function verifNom(){
+		var nomVar= document.getElementById("nomInternaute");
+		var erreurNom=document.getElementById("erreurNom");
+		var resultat=true;
+		 if(nomVar.value==""){
+			 resultat=false;
+			 erreurNom.textContent="Entrez votre nom";
+		 }else{
+			 erreurNom.textContent="";
+		 }
+		 return resultat;
+	 }
+ 
+ function verifMail(){
+		var mailVar= document.getElementById("mailInternaute");
+		var erreurMail=document.getElementById("erreurMail");
+		var resultat=true;
+		 if(mailVar.value==""){
+			 resultat=false;
+			 erreurMail.textContent="Entrez votre mail";
+		 }else{
+			 erreurMail.textContent="";
+		 }
+		 return resultat;
+	 }
+ 
+ function verifArea(){
+		var mailVar= document.getElementById("areaCommentaire");
+		var erreurMail=document.getElementById("erreurArea");
+		var resultat=true;
+		 if(mailVar.value==""){
+			 resultat=false;
+			 erreurArea.textContent="Entrez votre commentaire";
+		 }else{
+			 erreurArea.textContent="";
+		 }
+		 return resultat;
+	 }
+ 
+ function verifRadio(){
+		var radioVar= document.getElementById("radioCommentaire");
+		var erreurRadio=document.getElementById("erreurRadio");
+		var resultat=true;
+		 if(!radioVar.checked){
+			 resultat=false;
+			 erreurRadio.textContent="Cochez la case";
+		 }else{
+			 erreurRadio.textContent="";
+		 }
+		 return resultat;
+	 }
+
+ 
+ 
+ function verifForm(){
+	    var r1=verifNom();
+	    var r2=verifPrenom();
+	    var r3=verifMail();
+	    var r4=verifArea();
+	    var r5=verifRadio();
+	    
+	   
+	return r1 && r2 && r3 && r4 && r5 ;
+
+	}
+ 
+ 
  </script>

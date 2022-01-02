@@ -51,7 +51,7 @@ public class ConfigurationBDD {
     /* package */
     public static Session getSession() throws SQLException {
 
-        if ( session == null )
+        if ( session == null || !session.isOpen() )
             new ConfigurationBDD();
 
         return session;

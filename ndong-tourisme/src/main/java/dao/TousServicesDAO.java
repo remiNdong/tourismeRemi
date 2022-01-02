@@ -4,11 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import configuration.ConfigurationBDD;
 import modeles.Activite;
 import modeles.Hotel;
+import modeles.Notation;
 import modeles.Restaurant;
 import modeles.Service;
 import utils.SqlUtils;
@@ -20,7 +22,7 @@ public class TousServicesDAO {
      */
     private Session session;
 
-    public TousServicesDAO() {
+    public TousServicesDAO() throws Exception {
 
         try {
 
@@ -28,6 +30,7 @@ public class TousServicesDAO {
 
         } catch ( Exception e ) {
             throw new RuntimeException( "probleme de connexion à la base de données" );
+
         }
 
     }
@@ -170,6 +173,24 @@ public class TousServicesDAO {
             throw new RuntimeException( "Aucun Service trouvé" );
 
         return listVilles;
+
+    }
+
+    public void insertNotation( Notation n ) {
+
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+
+            session.persist( n );
+            tx.commit();
+        } catch ( RuntimeException e ) {
+            if ( tx != null )
+                tx.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
 
     }
 
