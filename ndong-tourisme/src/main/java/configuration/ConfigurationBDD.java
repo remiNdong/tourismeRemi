@@ -47,8 +47,11 @@ public class ConfigurationBDD {
 
     }
 
-    /* Méthode chargée de fournir une connexion à la base de données */
-    /* package */
+    /*
+     * Méthode chargée de fournir une connexion à la base de données. Une seule
+     * session sera instancié.
+     */
+
     public static Session getSession() throws SQLException {
 
         if ( session == null || !session.isOpen() )
