@@ -49,7 +49,7 @@ public class ConfigurationBDD {
 
     /*
      * Méthode chargée de fournir une connexion à la base de données. Une seule
-     * session sera instancié.
+     * session sera instancié..
      */
 
     public static Session getSession() throws SQLException {
