@@ -1,6 +1,7 @@
 package controleurs;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -138,11 +139,9 @@ public class DetailService extends HttpServlet {
 
             }
 
-            // tous les ervices ont des notations donc on peut enregistrer
-            // l'objet ds la requete en tant que service et pas obligé sa sous
-            // classe
             Service serviceNote = tousServicesDAO.findService( idService );
-            request.setAttribute( "serviceNote", serviceNote );
+            List<Notation> notationsTriees = serviceNote.getNotationsTriees();
+            request.setAttribute( "notationsTriees", notationsTriees );
 
             maVue = VUES + "detailService.jsp";
 

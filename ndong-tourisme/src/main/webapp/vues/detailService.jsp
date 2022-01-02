@@ -101,7 +101,7 @@
  	 	 	
  	 	 	
  	 	 	<ol>
- 	 	 		 <c:forEach items="${ serviceNote.notations }" var="notation" >
+ 	 	 		 <c:forEach items="${ notationsTriees }" var="notation" >
  	 	 		 
  	 	 		 <c:choose>
  	 	

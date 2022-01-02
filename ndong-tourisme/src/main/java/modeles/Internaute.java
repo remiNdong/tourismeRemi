@@ -1,7 +1,7 @@
 package modeles;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,7 +59,7 @@ public class Internaute {
     }
 
     @OneToMany( mappedBy = "internaute" )
-    private Set<Notation> notations = new TreeSet<Notation>();
+    private Set<Notation> notations = new HashSet<Notation>();
 
     public Set<Notation> getNotations() {
         return notations;
