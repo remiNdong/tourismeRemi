@@ -8,6 +8,10 @@ import org.hibernate.query.Query;
 import configuration.ConfigurationBDD;
 import modeles.Offre;
 
+/**
+ * Objet qui permet de faire les transactions concernant les Offres avec la base
+ * de données
+ */
 public class OffresDAO {
 
     /**

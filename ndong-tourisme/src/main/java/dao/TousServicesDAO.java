@@ -40,7 +40,7 @@ public class TousServicesDAO {
 
     }
 
-    /*
+    /**
      * Methode qui sera utilisé pour selectionner la ville du Service et filtrer
      */
 

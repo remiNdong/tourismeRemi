@@ -9,6 +9,10 @@ import configuration.ConfigurationBDD;
 import modeles.Activite;
 import utils.SqlUtils;
 
+/**
+ * Objet qui permet de faire les transactions concernant les Activites avec la
+ * base de données
+ */
 public class ActivitesDAO {
 
     /**
@@ -27,12 +31,10 @@ public class ActivitesDAO {
         }
     }
 
-    /*
-     * Methode qui sera utilisé pour selectionner la ville du Service et la le
-     * type
-     * 
+    /**
+     * Methode qui sera utilisé pour selectionner une activité selon la ville et
+     * le type
      */
-
     public List<Activite> selectionActivites( List<String> attributs, List<String> selections,
             List<Object> valeurs ) {
 

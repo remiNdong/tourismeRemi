@@ -10,6 +10,10 @@ import modeles.Hotel;
 import modeles.Service;
 import utils.SqlUtils;
 
+/**
+ * Objet qui permet de faire les transactions concernant les Hotels avec la base
+ * de données
+ */
 public class HotelsDAO {
 
     /**
@@ -28,9 +32,10 @@ public class HotelsDAO {
         }
     }
 
-    /*
-     * Methode qui sera utilisé pour selectionner la ville du Service et le
-     * nombre d'etoiles et filtrer
+    /**
+     * Methode qui sera utilisé pour selectionner un hotel selon la ville et le
+     * nombre d'étoiles
+     * 
      */
 
     public List<Hotel> selectionHotels( List<String> attributs, List<String> selections, List<Object> valeurs ) {

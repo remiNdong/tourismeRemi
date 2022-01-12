@@ -47,6 +47,11 @@ public class Offre {
         this.prix = prix;
     }
 
+    /**
+     * 
+     * methode qui permet de calculer le prix de l'offre selon le type de
+     * Service , Hotel Restaurant ou Activité
+     */
     public Double calculDuPrixFinal( String type ) {
 
         Double retour = this.prix;
@@ -54,15 +59,14 @@ public class Offre {
         // on va tester de quel type est le Service pour calculer son prix
         if ( type.equals( "Hotel" ) ) {
             Hotel hotel = (Hotel) prestataire;
-
             return retour - ( retour * hotel.getPourcentageMarge() / 100 );
+
         } else if ( type.equals( "Restaurant" ) ) {
             Restaurant restaurant = (Restaurant) prestataire;
-
             return retour - restaurant.getMargeFixe();
+
         } else if ( type.equals( "Activite" ) ) {
             Activite activite = (Activite) prestataire;
-
             return retour - activite.getMargeNegociee();
         }
 

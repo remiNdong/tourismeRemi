@@ -9,6 +9,10 @@ import configuration.ConfigurationBDD;
 import modeles.Restaurant;
 import utils.SqlUtils;
 
+/**
+ * Objet qui permet de faire les transactions concernant les Restaurants avec la
+ * base de données
+ */
 public class RestaurantsDAO {
 
     /**
@@ -27,10 +31,9 @@ public class RestaurantsDAO {
         }
     }
 
-    /*
-     * Methode qui sera utilisé pour selectionner la ville du Service et la
-     * possibilité d'avoir une terrasse et de reserver
-     * 
+    /**
+     * Methode qui sera utilisé pour selectionner un restaurant selon la ville ,
+     * la posibilité de reserver et la terrasse
      */
 
     public List<Restaurant> selectionRestaurants( List<String> attributs, List<String> selections,
