@@ -16,7 +16,10 @@ import modeles.Activite;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class Activites
+ * Servlet implementation class Activites. Apres etre passé par le Routeur, si
+ * on selectionne les Activites on aura une page d'activite avec des choix de
+ * numéro pages en lien en bas de page. ce numero est un parametre qui permet de
+ * naviguer dans un objet EnsemblePage<Activite> chargé en session
  */
 @WebServlet( "/Activites" )
 public class Activites extends HttpServlet {
@@ -59,6 +62,7 @@ public class Activites extends HttpServlet {
             List<Activite> listActivites = ensemblePage.getPage( indexPage );
 
             httpSession.setAttribute( "ensemblePage", ensemblePage );
+            // listePage servira a afficher les numéros de pages
             request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
             request.setAttribute( "listActivites", listActivites );
 

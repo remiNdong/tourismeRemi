@@ -23,7 +23,9 @@ import modeles.Service;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class Routeur
+ * Servlet implementation class Routeur. Apres le passage par l'acceuil et la
+ * jsp index, la requete est dirigée vers ce controleur qui affectera
+ * l'utilisateur vers le bon type de service demandé
  */
 @WebServlet( "/Routeur" )
 public class Routeur extends HttpServlet {
@@ -52,7 +54,8 @@ public class Routeur extends HttpServlet {
             String action = request.getParameter( "action" );
 
             // lors de l'arrivee au routeur on sera toujours a la page 1 a
-            // afficher
+            // afficher que ce soit la page 1 de tous les services, des
+            // activités, des hotels ou des restaurants
             int indexPage = 1;
 
             HttpSession httpSession = request.getSession();
@@ -61,7 +64,9 @@ public class Routeur extends HttpServlet {
                 TousServicesDAO tousServicesDAO = new TousServicesDAO();
 
                 String ville = request.getParameter( "ville" );
-                // parametre de la fonction de preparations de requete Sql
+
+                // le tableaux valeurs est un parametre de la fonction de
+                // preparations de requete Sql voir classe utils.SdqlUtils
                 // pour la selection de Service on a un seul critere de
                 // selection qui est la ville
                 List<Object> valeurs = new ArrayList<Object>();
@@ -85,7 +90,10 @@ public class Routeur extends HttpServlet {
                 List<String> listVilles = tousServicesDAO.listVilles();
                 request.setAttribute( "villes", listVilles );
 
+                // ensemblePage est enregistré en session car on devra le
+                // charger pour naviguer dans les pages de l'ensemble
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                // listePage servira a afficher les numéros de pages
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listServices", listServices );
 
@@ -141,6 +149,7 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "etoiles", listEtoiles );
 
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                // listePage servira a afficher les numéros de pages
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listHotels", listHotels );
 
@@ -196,6 +205,7 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "villes", listVilles );
 
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                // listePage servira a afficher les numéros de pages
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listRestaurants", listRestaurants );
 
@@ -248,6 +258,7 @@ public class Routeur extends HttpServlet {
                 request.setAttribute( "types", listTypes );
 
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                // listePage servira a afficher les numéros de pages
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listActivites", listActivites );
 

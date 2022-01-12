@@ -16,7 +16,10 @@ import modeles.Hotel;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class Hotels
+ * Servlet implementation class Hotels.Apres etre passé par le Routeur, si on
+ * selectionne les Hotels on aura une page d'hotels avec des choix de numéro
+ * pages en lien en bas de page. ce numero est un parametre qui permet de
+ * naviguer dans un objet EnsemblePage<Hotel> chargé en session
  */
 @WebServlet( "/Hotels" )
 public class Hotels extends HttpServlet {
@@ -58,6 +61,7 @@ public class Hotels extends HttpServlet {
             List<Hotel> listHotels = ensemblePage.getPage( indexPage );
 
             httpSession.setAttribute( "ensemblePage", ensemblePage );
+            // listePage servira a afficher les numéros de pages
             request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
             request.setAttribute( "listHotels", listHotels );
 

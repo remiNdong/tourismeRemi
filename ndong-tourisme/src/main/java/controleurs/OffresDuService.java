@@ -15,7 +15,11 @@ import modeles.Offre;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class OffresDuService
+ * Servlet implementation class OffresDuService. Apres etre passé par le
+ * controleur Offres, si on on aura une page d'offres d'une entité de Service
+ * avec des choix de numéro pages en lien en bas de page. ce numero est un
+ * parametre qui permet de naviguer dans un objet EnsemblePage<Offre> chargé en
+ * session
  */
 @WebServlet( "/OffresDuService" )
 public class OffresDuService extends HttpServlet {
@@ -55,6 +59,7 @@ public class OffresDuService extends HttpServlet {
             List<Offre> listeOffres = ensemblePage.getPage( indexPage );
 
             httpSession.setAttribute( "ensemblePage", ensemblePage );
+            // listePage servira a afficher les numéros de pages
             request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
             request.setAttribute( "listeOffres", listeOffres );
 

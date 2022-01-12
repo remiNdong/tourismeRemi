@@ -15,6 +15,11 @@ import modeles.Restaurant;
 import modeles.Service;
 import utils.SqlUtils;
 
+/**
+ * Objet qui permet de faire les transactions concernant les services avec la
+ * base de données
+ */
+
 public class TousServicesDAO {
 
     /**

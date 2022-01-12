@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Acceuil
+ * Servlet implementation class Acceuil. Porte d'entrée du site
  */
 @WebServlet( urlPatterns = { "/Acceuil", "/acceuil" } )
 public class Acceuil extends HttpServlet {

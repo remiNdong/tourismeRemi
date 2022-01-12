@@ -19,7 +19,10 @@ import modeles.Restaurant;
 import modeles.Service;
 
 /**
- * Servlet implementation class DetailService
+ * Servlet implementation class DetailService. Celle ci permettra de voir le
+ * detail d'un Service et de noter ce Service. Il y a une seule Servlet
+ * DetailService pour tous les Services mais des criteres seront affichés ou non
+ * selon le type de Service (Hotel, Restaurant ou Activité)
  */
 @WebServlet( "/DetailService" )
 public class DetailService extends HttpServlet {
@@ -48,6 +51,10 @@ public class DetailService extends HttpServlet {
             Long idService = Long.parseLong( idServiceString );
 
             TousServicesDAO tousServicesDAO = new TousServicesDAO();
+
+            // il faudra indiquer dans la requete le type de Service car
+            // certains attributs seront a afficher ou non dans la jsp selon le
+            // type de service
 
             if ( tousServicesDAO.estUnHotel( idService ) ) {
                 Hotel service = tousServicesDAO.findHotel( idService );
@@ -89,6 +96,9 @@ public class DetailService extends HttpServlet {
                     notation.setInternaute( internaute );
                     Service service = tousServicesDAO.findService( idService );
                     notation.setService( service );
+
+                    // selon le type de service qu'on note on aura des criteres
+                    // pris en compte ou non
 
                     String classement = request.getParameter( "classement" );
                     if ( classement != null ) {

@@ -17,8 +17,8 @@ import modeles.Restaurant;
 import modeles.Service;
 
 /**
- * Classe servant a declarer toutes les classes persistantes et à recuperer une
- * configuration
+ * Classe servant a declarer toutes les classes persistantes et à fournir une
+ * session pour les objets DAO qui feront des transactions
  */
 
 public class ConfigurationBDD {
@@ -48,8 +48,8 @@ public class ConfigurationBDD {
     }
 
     /*
-     * Méthode chargée de fournir une connexion à la base de données. Une seule
-     * session sera instancié..
+     * Méthode chargée de fournir une session hibernate aux objets DAO. Une
+     * seule session sera instancié..
      */
 
     public static Session getSession() throws SQLException {

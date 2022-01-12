@@ -16,7 +16,11 @@ import modeles.Service;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class TousServices
+ * Servlet implementation class TousServices.Apres etre passé par le Routeur, si
+ * on selectionne les Services sans type particulier on aura une page de
+ * services avec des choix de numéro pages en lien en bas de page. ce numero est
+ * un parametre qui permet de naviguer dans un objet EnsemblePage<Service>
+ * chargé en session
  */
 @WebServlet( "/TousServices" )
 public class TousServices extends HttpServlet {

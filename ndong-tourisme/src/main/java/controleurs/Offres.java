@@ -18,7 +18,10 @@ import modeles.Service;
 import modelesWeb.EnsemblePage;
 
 /**
- * Servlet implementation class Offres
+ * Servlet implementation class Offres. Les Offres seront contenus dans un objet
+ * EnsemblePage<Offre> lors du passage par ce controleur on sera toujours
+ * renvoyé vers la 1ere page de cet ensemble pour les offres d'une entité de
+ * Service
  */
 @WebServlet( "/Offres" )
 public class Offres extends HttpServlet {
@@ -65,6 +68,7 @@ public class Offres extends HttpServlet {
                 HttpSession httpSession = request.getSession();
                 httpSession.setAttribute( "service", service );
                 httpSession.setAttribute( "ensemblePage", ensemblePage );
+                // listePage servira a afficher les numéros de pages
                 request.setAttribute( "listePage", ensemblePage.getPages().keySet() );
                 request.setAttribute( "listeOffres", listeOffres );
 
