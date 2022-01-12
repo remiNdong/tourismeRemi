@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 /*
  * 
- * Objet qui permettra de paginer les resultats des diferents services dans les pages Web
+ * Objet qui permettra de paginer les resultats des différents services dans les pages Web
  */
 
 public class EnsemblePage<E> {
